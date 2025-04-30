@@ -1,0 +1,344 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|solutionrelative:backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\entidades\\entities\\financeappcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|solutionrelative:entidades\\entities\\financeappcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\backend\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\backend\\services\\implementaciones\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|solutionrelative:backend\\services\\implementaciones\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\backend\\dto\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|solutionrelative:backend\\dto\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\backend\\services\\interfaces\\iusuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|solutionrelative:backend\\services\\interfaces\\iusuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\dal\\implementaciones\\unidaddetrabajo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|solutionrelative:dal\\implementaciones\\unidaddetrabajo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\dal\\interfaces\\iunidaddetrabajo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\iunidaddetrabajo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\dal\\implementaciones\\usuariodal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|solutionrelative:dal\\implementaciones\\usuariodal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\dal\\interfaces\\iusuariodal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\iusuariodal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\entidades\\entities\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|solutionrelative:entidades\\entities\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\dal\\implementaciones\\dalgenericoimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|solutionrelative:dal\\implementaciones\\dalgenericoimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\dal\\interfaces\\idalgenerico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\idalgenerico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\entidades\\entities\\transaccione.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|solutionrelative:entidades\\entities\\transaccione.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\entidades\\entities\\presupuesto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|solutionrelative:entidades\\entities\\presupuesto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\entidades\\entities\\pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|solutionrelative:entidades\\entities\\pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\entidades\\entities\\notificacione.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|solutionrelative:entidades\\entities\\notificacione.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\entidades\\entities\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|solutionrelative:entidades\\entities\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\entidades\\entities\\ahorro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|solutionrelative:entidades\\entities\\ahorro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "Backend\\appsettings.json",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\appsettings.json",
+              "RelativeToolTip": "Backend\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-30T17:42:15.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:35:57.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UsuarioDTO.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\DTO\\UsuarioDTO.cs",
+              "RelativeDocumentMoniker": "Backend\\DTO\\UsuarioDTO.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\DTO\\UsuarioDTO.cs",
+              "RelativeToolTip": "Backend\\DTO\\UsuarioDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:20:17.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UsuarioDAL.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\UsuarioDAL.cs",
+              "RelativeDocumentMoniker": "DAL\\Implementaciones\\UsuarioDAL.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\UsuarioDAL.cs",
+              "RelativeToolTip": "DAL\\Implementaciones\\UsuarioDAL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:15:41.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IUsuarioDAL.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Interfaces\\IUsuarioDAL.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\IUsuarioDAL.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Interfaces\\IUsuarioDAL.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\IUsuarioDAL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:14:20.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UnidadDeTrabajo.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\UnidadDeTrabajo.cs",
+              "RelativeDocumentMoniker": "DAL\\Implementaciones\\UnidadDeTrabajo.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\UnidadDeTrabajo.cs",
+              "RelativeToolTip": "DAL\\Implementaciones\\UnidadDeTrabajo.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:51:08.476Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Backend\\Program.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Program.cs",
+              "RelativeToolTip": "Backend\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:39:04.515Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FinanceAppContext.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\FinanceAppContext.cs",
+              "RelativeDocumentMoniker": "Entidades\\Entities\\FinanceAppContext.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\FinanceAppContext.cs",
+              "RelativeToolTip": "Entidades\\Entities\\FinanceAppContext.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAkwCMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:31:55.547Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IUsuarioService.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Services\\Interfaces\\IUsuarioService.cs",
+              "RelativeDocumentMoniker": "Backend\\Services\\Interfaces\\IUsuarioService.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Services\\Interfaces\\IUsuarioService.cs",
+              "RelativeToolTip": "Backend\\Services\\Interfaces\\IUsuarioService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:22:05.233Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UsuarioService.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Services\\Implementaciones\\UsuarioService.cs",
+              "RelativeDocumentMoniker": "Backend\\Services\\Implementaciones\\UsuarioService.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Services\\Implementaciones\\UsuarioService.cs",
+              "RelativeToolTip": "Backend\\Services\\Implementaciones\\UsuarioService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:24:05.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IUnidadDeTrabajo.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Interfaces\\IUnidadDeTrabajo.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\IUnidadDeTrabajo.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Interfaces\\IUnidadDeTrabajo.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\IUnidadDeTrabajo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:48:46.465Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DALGenericoImpl.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\DALGenericoImpl.cs",
+              "RelativeDocumentMoniker": "DAL\\Implementaciones\\DALGenericoImpl.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\DALGenericoImpl.cs",
+              "RelativeToolTip": "DAL\\Implementaciones\\DALGenericoImpl.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:42:57.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IDALGenerico.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Interfaces\\IDALGenerico.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\IDALGenerico.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Interfaces\\IDALGenerico.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\IDALGenerico.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:40:47.383Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Usuario.cs",
+              "RelativeDocumentMoniker": "Entidades\\Entities\\Usuario.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Usuario.cs",
+              "RelativeToolTip": "Entidades\\Entities\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:34:36.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Transaccione.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Transaccione.cs",
+              "RelativeDocumentMoniker": "Entidades\\Entities\\Transaccione.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Transaccione.cs",
+              "RelativeToolTip": "Entidades\\Entities\\Transaccione.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:37:27.469Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Presupuesto.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Presupuesto.cs",
+              "RelativeDocumentMoniker": "Entidades\\Entities\\Presupuesto.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Presupuesto.cs",
+              "RelativeToolTip": "Entidades\\Entities\\Presupuesto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:37:24.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Pago.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Pago.cs",
+              "RelativeDocumentMoniker": "Entidades\\Entities\\Pago.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Pago.cs",
+              "RelativeToolTip": "Entidades\\Entities\\Pago.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:37:16.957Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Notificacione.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Notificacione.cs",
+              "RelativeDocumentMoniker": "Entidades\\Entities\\Notificacione.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Notificacione.cs",
+              "RelativeToolTip": "Entidades\\Entities\\Notificacione.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:37:15.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Categoria.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Categoria.cs",
+              "RelativeDocumentMoniker": "Entidades\\Entities\\Categoria.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Categoria.cs",
+              "RelativeToolTip": "Entidades\\Entities\\Categoria.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:33:48.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Ahorro.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Ahorro.cs",
+              "RelativeDocumentMoniker": "Entidades\\Entities\\Ahorro.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Ahorro.cs",
+              "RelativeToolTip": "Entidades\\Entities\\Ahorro.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:33:16.357Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
