@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|solutionrelative:backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\dal\\implementaciones\\dalgenericoimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|solutionrelative:dal\\implementaciones\\dalgenericoimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE7E1298-9B61-4522-BB80-D2F547DB3F67}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\entidades\\entities\\financeappcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,10 +55,6 @@
       "RelativeMoniker": "D:0:0:{718DD2D6-77FB-4A00-BC1E-DBE50F67C424}|Entidades\\Entidades.csproj|solutionrelative:entidades\\entities\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\dal\\implementaciones\\dalgenericoimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|solutionrelative:dal\\implementaciones\\dalgenericoimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|c:\\fundaweb\\proyecto\\financeapp-backend\\dal\\interfaces\\idalgenerico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E7FAD267-A5ED-4FBC-91AD-74F96168DEFF}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\idalgenerico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -90,61 +90,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\appsettings.json",
-              "RelativeDocumentMoniker": "Backend\\appsettings.json",
-              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\appsettings.json",
-              "RelativeToolTip": "Backend\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-30T17:42:15.27Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UsuarioController.cs",
-              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Controllers\\UsuarioController.cs",
-              "RelativeDocumentMoniker": "Backend\\Controllers\\UsuarioController.cs",
-              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Controllers\\UsuarioController.cs",
-              "RelativeToolTip": "Backend\\Controllers\\UsuarioController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T07:35:57.716Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UsuarioDTO.cs",
-              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\DTO\\UsuarioDTO.cs",
-              "RelativeDocumentMoniker": "Backend\\DTO\\UsuarioDTO.cs",
-              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\DTO\\UsuarioDTO.cs",
-              "RelativeToolTip": "Backend\\DTO\\UsuarioDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T07:20:17.529Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UsuarioDAL.cs",
-              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\UsuarioDAL.cs",
-              "RelativeDocumentMoniker": "DAL\\Implementaciones\\UsuarioDAL.cs",
-              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\UsuarioDAL.cs",
-              "RelativeToolTip": "DAL\\Implementaciones\\UsuarioDAL.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T07:15:41.567Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "IUsuarioDAL.cs",
               "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Interfaces\\IUsuarioDAL.cs",
               "RelativeDocumentMoniker": "DAL\\Interfaces\\IUsuarioDAL.cs",
@@ -156,7 +106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "UnidadDeTrabajo.cs",
               "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\UnidadDeTrabajo.cs",
               "RelativeDocumentMoniker": "DAL\\Implementaciones\\UnidadDeTrabajo.cs",
@@ -168,7 +118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Backend\\Program.cs",
@@ -181,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "FinanceAppContext.cs",
               "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\FinanceAppContext.cs",
               "RelativeDocumentMoniker": "Entidades\\Entities\\FinanceAppContext.cs",
@@ -189,12 +139,11 @@
               "RelativeToolTip": "Entidades\\Entities\\FinanceAppContext.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAkwCMAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T06:31:55.547Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-30T06:31:55.547Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "IUsuarioService.cs",
               "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Services\\Interfaces\\IUsuarioService.cs",
               "RelativeDocumentMoniker": "Backend\\Services\\Interfaces\\IUsuarioService.cs",
@@ -206,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "UsuarioService.cs",
               "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Services\\Implementaciones\\UsuarioService.cs",
               "RelativeDocumentMoniker": "Backend\\Services\\Implementaciones\\UsuarioService.cs",
@@ -218,7 +167,69 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
+              "Title": "DALGenericoImpl.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\DALGenericoImpl.cs",
+              "RelativeDocumentMoniker": "DAL\\Implementaciones\\DALGenericoImpl.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\DALGenericoImpl.cs",
+              "RelativeToolTip": "DAL\\Implementaciones\\DALGenericoImpl.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAowCwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T06:42:57.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "Backend\\appsettings.json",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\appsettings.json",
+              "RelativeToolTip": "Backend\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAACrAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-30T17:42:15.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UsuarioDAL.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\UsuarioDAL.cs",
+              "RelativeDocumentMoniker": "DAL\\Implementaciones\\UsuarioDAL.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\UsuarioDAL.cs",
+              "RelativeToolTip": "DAL\\Implementaciones\\UsuarioDAL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:15:41.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UsuarioDTO.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\DTO\\UsuarioDTO.cs",
+              "RelativeDocumentMoniker": "Backend\\DTO\\UsuarioDTO.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\DTO\\UsuarioDTO.cs",
+              "RelativeToolTip": "Backend\\DTO\\UsuarioDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:20:17.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Backend\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T07:35:57.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "IUnidadDeTrabajo.cs",
               "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Interfaces\\IUnidadDeTrabajo.cs",
               "RelativeDocumentMoniker": "DAL\\Interfaces\\IUnidadDeTrabajo.cs",
@@ -227,18 +238,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-30T06:48:46.465Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "DALGenericoImpl.cs",
-              "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\DALGenericoImpl.cs",
-              "RelativeDocumentMoniker": "DAL\\Implementaciones\\DALGenericoImpl.cs",
-              "ToolTip": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\DAL\\Implementaciones\\DALGenericoImpl.cs",
-              "RelativeToolTip": "DAL\\Implementaciones\\DALGenericoImpl.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T06:42:57.372Z"
             },
             {
               "$type": "Document",
@@ -254,7 +253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\FundaWeb\\Proyecto\\FinanceApp-Backend\\Entidades\\Entities\\Usuario.cs",
               "RelativeDocumentMoniker": "Entidades\\Entities\\Usuario.cs",

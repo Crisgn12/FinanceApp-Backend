@@ -1,3 +1,8 @@
+# Archivos específicos que aparecen en tus cambios
+**/DocumentLayout*.json
+**/*.suo
+**/*.vsidx
+
 # Build results
 bin/
 obj/
