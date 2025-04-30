@@ -11,3 +11,8 @@ obj/
 *.log
 *.cache
 *.db
+
+# Ignorar archivos de GitHub Copilot
+CopilotIndices/
+*.db-shm
+*.db-wal
