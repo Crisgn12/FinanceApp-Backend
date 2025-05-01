@@ -18,6 +18,7 @@ namespace Backend.Controllers
 
         // GET: api/<UsuarioController>
         [HttpGet]
+        [Route("ListarUsuarios")]
         public IEnumerable<UsuarioDTO> ListarUsuarios()
         {
             return _usuarioService.ObtenerListaUsuarios();
