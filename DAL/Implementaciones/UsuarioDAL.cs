@@ -1,5 +1,7 @@
 ﻿using DAL.Interfaces;
 using Entidades.Entities;
+using Entidades.Request;
+using Entidades.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,7 @@ namespace DAL.Implementaciones
         {
             _context = context;
         }
+
+        
     }
 }

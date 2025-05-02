@@ -21,13 +21,13 @@ public partial class FinanceAppContext : DbContext
 
     public virtual DbSet<Informe> Informes { get; set; }
 
-    public virtual DbSet<Notificacione> Notificaciones { get; set; }
+    public virtual DbSet<Notificacion> Notificaciones { get; set; }
 
     public virtual DbSet<Pago> Pagos { get; set; }
 
     public virtual DbSet<Presupuesto> Presupuestos { get; set; }
 
-    public virtual DbSet<Transaccione> Transacciones { get; set; }
+    public virtual DbSet<Transaccion> Transacciones { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
@@ -115,7 +115,7 @@ public partial class FinanceAppContext : DbContext
                 .HasConstraintName("FK_Informe_Usuario");
         });
 
-        modelBuilder.Entity<Notificacione>(entity =>
+        modelBuilder.Entity<Notificacion>(entity =>
         {
             entity.HasKey(e => e.NotificacionId).HasName("PK__Notifica__BCC120C49704C36D");
 
@@ -186,7 +186,7 @@ public partial class FinanceAppContext : DbContext
                 .HasConstraintName("FK_Presupuesto_Usuario");
         });
 
-        modelBuilder.Entity<Transaccione>(entity =>
+        modelBuilder.Entity<Transaccion>(entity =>
         {
             entity.HasKey(e => e.TransaccionId).HasName("PK__Transacc__86A849DE0B2D4EF4");
 

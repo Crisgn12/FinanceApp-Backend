@@ -1,5 +1,7 @@
 ﻿using Backend.DTO;
 using Backend.Services.Interfaces;
+using Entidades.Request;
+using Entidades.Response;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -33,8 +35,10 @@ namespace Backend.Controllers
 
         // POST api/<UsuarioController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("CrearUsuario")]
+        public ResCrearUsuario Crear(ReqCrearUsuario req)
         {
+            return _usuarioService.CrearUsuario(req);
         }
 
         // PUT api/<UsuarioController>/5

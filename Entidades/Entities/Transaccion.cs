@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Entidades.Entities;
 
-public partial class Transaccione
+public partial class Transaccion
 {
     public int TransaccionId { get; set; }
 
