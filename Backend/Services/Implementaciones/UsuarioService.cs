@@ -1,6 +1,6 @@
-﻿using Backend.DTO;
-using Backend.Services.Interfaces;
+﻿using Backend.Services.Interfaces;
 using DAL.Interfaces;
+using Entidades.DTOs;
 using Entidades.Entities;
 using Entidades.Request;
 using Entidades.Response;

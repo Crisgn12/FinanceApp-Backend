@@ -14,12 +14,14 @@ namespace DAL.Implementaciones
         private FinanceAppContext _context;
 
         public IUsuarioDAL UsuarioDAL { get; private set; }
+        public ICategoriaDAL CategoriaDAL { get; private set; }
 
 
-        public UnidadDeTrabajo(FinanceAppContext context, IUsuarioDAL usuarioDAL)
+        public UnidadDeTrabajo(FinanceAppContext context, IUsuarioDAL usuarioDAL, ICategoriaDAL categoriaDAL)
         {
             this._context = context;
             this.UsuarioDAL = usuarioDAL;
+            CategoriaDAL = categoriaDAL;
         }
 
         public bool GuardarCambios()
