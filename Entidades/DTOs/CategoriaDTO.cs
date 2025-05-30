@@ -8,7 +8,7 @@ namespace Entidades.DTOs
 {
     public class CategoriaDTO
     {
-        public int CategoriaID { get; set; }
+        public int? CategoriaID { get; set; }
 
         public int? UsuarioID { get; set; }
 
