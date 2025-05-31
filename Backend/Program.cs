@@ -26,6 +26,8 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioDAL, UsuarioDAL>();
 builder.Services.AddScoped<ICategoriaDAL, CategoriaDAL>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<ITransaccionDAL, TransaccionDAL>();
+builder.Services.AddScoped<ITransaccionService, TransaccionService>();
 
 var app = builder.Build();
 

@@ -15,13 +15,15 @@ namespace DAL.Implementaciones
 
         public IUsuarioDAL UsuarioDAL { get; private set; }
         public ICategoriaDAL CategoriaDAL { get; private set; }
+        public ITransaccionDAL TransaccionDAL { get; private set; }
 
 
-        public UnidadDeTrabajo(FinanceAppContext context, IUsuarioDAL usuarioDAL, ICategoriaDAL categoriaDAL)
+        public UnidadDeTrabajo(FinanceAppContext context, IUsuarioDAL usuarioDAL, ICategoriaDAL categoriaDAL, ITransaccionDAL transaccionDAL)
         {
             this._context = context;
             this.UsuarioDAL = usuarioDAL;
             CategoriaDAL = categoriaDAL;
+            TransaccionDAL = transaccionDAL;
         }
 
         public bool GuardarCambios()

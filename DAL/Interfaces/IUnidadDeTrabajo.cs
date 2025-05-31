@@ -11,6 +11,7 @@ namespace DAL.Interfaces
         // Poner aqui los repositorios (Las clases DAL)
         IUsuarioDAL UsuarioDAL { get; }
         ICategoriaDAL CategoriaDAL { get; }
+        ITransaccionDAL TransaccionDAL { get; }
 
         // Metodos
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Backend.Services.Interfaces;
+using Entidades.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,46 @@ namespace Backend.Controllers
     [ApiController]
     public class TransaccionController : ControllerBase
     {
-        // GET: api/<TransaccionController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        ITransaccionService _transaccionService;
+
+        public TransaccionController(ITransaccionService transaccionService)
         {
-            return new string[] { "value1", "value2" };
+            _transaccionService = transaccionService;
         }
 
-        // GET api/<TransaccionController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<TransaccionController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("IngresarTransaccion")]
+        public Task<bool> IngresarTransaccion(TransaccionDTO transaccionDTO)
         {
+            return _transaccionService.IngresarTransaccionAsync(transaccionDTO);
         }
 
-        // PUT api/<TransaccionController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        [Route("ObtenerTransaccionesPorUsuario")]
+        public Task<List<TransaccionDTO>> ObtenerTransaccionesPorUsuario(ObtenerTransaccionesPorUsuarioDTO req)
         {
+            return _transaccionService.ObtenerTransaccionesPorUsuarioAsync(req);
         }
 
-        // DELETE api/<TransaccionController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost]
+        [Route("ObtenerDetalleTransaccion")]
+        public Task<TransaccionDTO> ObtenerDetalleTransaccion(ObtenerDetalleTransaccionDTO req)
         {
+            return _transaccionService.ObtenerDetalleTransaccionAsync(req);
+        }
+
+        [HttpPut]
+        [Route("ActualizarTransaccion")]
+        public Task<bool> ActualizarTransaccion(TransaccionDTO transaccionDTO)
+        {
+            return _transaccionService.ActualizarTransaccionAsync(transaccionDTO);
+        }
+
+        [HttpDelete]
+        [Route("EliminarTransaccion")]
+        public Task<bool> EliminarTransaccion(EliminarTransaccionDTO req)
+        {
+            return _transaccionService.EliminarTransaccionAsync(req);
         }
     }
 }
