@@ -12,6 +12,7 @@ namespace DAL.Interfaces
         IUsuarioDAL UsuarioDAL { get; }
         ICategoriaDAL CategoriaDAL { get; }
         ITransaccionDAL TransaccionDAL { get; }
+        IPagoProgramadoDAL PagoProgramadoDAL { get; }
 
         // Metodos
 

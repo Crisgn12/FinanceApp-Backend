@@ -22,4 +22,10 @@ public partial class Pago
     public DateTime? CreatedAt { get; set; }
 
     public virtual Usuario Usuario { get; set; } = null!;
+    public bool EsProgramado { get; set; }
+    public string? Frecuencia { get; set; }
+    public DateOnly? FechaInicio { get; set; }
+    public DateOnly? FechaFin { get; set; }
+    public DateOnly? ProximoVencimiento { get; set; }
+    public bool Activo { get; set; }
 }
