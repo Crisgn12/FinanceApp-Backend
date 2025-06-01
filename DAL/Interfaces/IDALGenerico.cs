@@ -13,5 +13,6 @@ namespace DAL.Interfaces
         bool Remove(TEntity entity);
         TEntity Get(string id);
         IEnumerable<TEntity> GetAll();
+        TEntity FindById(int id);
     }
 }

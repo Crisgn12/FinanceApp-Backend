@@ -24,6 +24,8 @@ builder.Services.AddDbContext<FinanceAppContext>();
 builder.Services.AddScoped<IUnidadDeTrabajo, UnidadDeTrabajo>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioDAL, UsuarioDAL>();
+builder.Services.AddScoped<IAhorroService, AhorroService>();
+builder.Services.AddScoped<IAhorroDAL, AhorroDALImpl>();
 
 var app = builder.Build();
 

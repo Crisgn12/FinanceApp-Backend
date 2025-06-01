@@ -73,5 +73,10 @@ namespace DAL.Implementaciones
                 return false;
             }
         }
+
+        public TEntity FindById(int id)
+        {
+            return _context.Set<TEntity>().Find(id);
+        }
     }
 }

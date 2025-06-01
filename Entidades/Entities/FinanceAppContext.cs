@@ -16,6 +16,7 @@ public partial class FinanceAppContext : DbContext
     }
 
     public virtual DbSet<Ahorro> Ahorros { get; set; }
+    public virtual DbSet<AporteMetaAhorro> AporteMetaAhorros { get; set; }
 
     public virtual DbSet<Categoria> Categorias { get; set; }
 
@@ -62,12 +63,47 @@ public partial class FinanceAppContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("updated_at");
             entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
-
+            entity.Property(e => e.UltimaNotificacion)
+               .HasColumnType("datetime")
+               .IsRequired(false);
+            entity.HasMany(e => e.Aportes)
+               .WithOne(e => e.MetaAhorro)
+               .HasForeignKey(e => e.MetaAhorroId)
+               .OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(d => d.Usuario).WithMany(p => p.Ahorros)
                 .HasForeignKey(d => d.UsuarioId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Ahorro_Usuario");
         });
+
+        modelBuilder.Entity<AporteMetaAhorro>(entity =>
+        {
+            entity.HasKey(e => e.AporteId).HasName("PK__AporteMetaAhorro");
+
+            entity.ToTable("AporteMetaAhorro");
+
+            entity.Property(e => e.AporteId).HasColumnName("AporteId");
+
+            entity.Property(e => e.MetaAhorroId).HasColumnName("MetaAhorroId");
+
+            entity.Property(e => e.Fecha)
+                .HasColumnType("date")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.Monto)
+                .HasColumnType("decimal(18, 2)");
+
+            entity.Property(e => e.Observaciones)
+                .HasMaxLength(255)
+                .IsUnicode();
+
+            entity.HasOne(d => d.MetaAhorro)
+                .WithMany()
+                .HasForeignKey(d => d.MetaAhorroId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AporteMetaAhorro_Ahorro");
+        });
+
 
         modelBuilder.Entity<Categoria>(entity =>
         {

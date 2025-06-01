@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Entidades.Entities;
+﻿namespace Entidades.Entities;
 
 public partial class Ahorro
 {
@@ -21,5 +18,12 @@ public partial class Ahorro
 
     public bool Completado { get; set; }
 
+    public DateTime? FechaMeta { get; set; }
+
+    public DateTime? UltimaNotificacion { get; set; }
+
     public virtual Usuario Usuario { get; set; } = null!;
+    public virtual ICollection<AporteMetaAhorro> Aportes { get; set; } = new List<AporteMetaAhorro>();
+
+    //public decimal PorcentajeProgreso => MontoObjetivo == 0 ? 0 : (MontoActual / MontoObjetivo) * 100;
 }

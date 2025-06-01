@@ -10,6 +10,8 @@ namespace DAL.Interfaces
     {
         // Poner aqui los repositorios (Las clases DAL)
         IUsuarioDAL UsuarioDAL { get; }
+        IAhorroDAL AhorroDALImpl { get; }
+        IAporteMetaAhorroDAL AporteMetaAhorroDALImpl { get; }
 
         // Metodos
 

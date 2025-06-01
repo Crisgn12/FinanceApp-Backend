@@ -15,11 +15,16 @@ namespace DAL.Implementaciones
 
         public IUsuarioDAL UsuarioDAL { get; private set; }
 
+        public IAhorroDAL AhorroDALImpl { get; private set; }
+        public IAporteMetaAhorroDAL AporteMetaAhorroDALImpl { get; private set; }
 
-        public UnidadDeTrabajo(FinanceAppContext context, IUsuarioDAL usuarioDAL)
+
+        public UnidadDeTrabajo(FinanceAppContext context, IUsuarioDAL usuarioDAL, IAhorroDAL ahorroDALImpl, IAporteMetaAhorroDAL aporteMetaAhorroDALImpl)
         {
             this._context = context;
             this.UsuarioDAL = usuarioDAL;
+            this.AhorroDALImpl = ahorroDALImpl;
+            this.AporteMetaAhorroDALImpl = aporteMetaAhorroDALImpl;
         }
 
         public bool GuardarCambios()
