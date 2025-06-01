@@ -20,6 +20,9 @@ namespace Backend.Controllers
         [HttpPost("crear")]
         public IActionResult CrearAhorro([FromBody] AhorroDTO ahorro)
         {
+            if (ahorro == null || ahorro.UsuarioID <= 0 || string.IsNullOrWhiteSpace(ahorro.Nombre) || ahorro.Monto_Objetivo <= 0)
+                return BadRequest("Datos inválidos para la meta de ahorro.");
+
             var result = _ahorroService.AddAhorro(ahorro);
             return Ok(result);
         }
@@ -27,6 +30,9 @@ namespace Backend.Controllers
         [HttpPost("obtenerAhorros")]
         public IActionResult ObtenerAhorros([FromBody] UsuarioDTO usuario)
         {
+            if (usuario == null || usuario.UsuarioId <= 0)
+                return BadRequest("ID de usuario inválido.");
+
             var result = _ahorroService.GetAhorros(usuario.UsuarioId);
             return Ok(result);
         }
@@ -34,13 +40,20 @@ namespace Backend.Controllers
         [HttpPost("obtener-idAhorro")]
         public IActionResult GetAhorroById([FromBody] AhorroDTO request)
         {
+            if (request.AhorroID == null || request.AhorroID <= 0)
+                return BadRequest("ID de ahorro inválido.");
+
             var result = _ahorroService.GetAhorroById(request.AhorroID.Value);
+            if (result == null) return NotFound();
             return Ok(result);
         }
 
         [HttpPost("actualizar")]
         public IActionResult UpdateAhorro([FromBody] AhorroDTO ahorro)
         {
+            if (ahorro.AhorroID == null || ahorro.AhorroID <= 0)
+                return BadRequest("ID de ahorro inválido para actualizar.");
+
             var result = _ahorroService.UpdateAhorro(ahorro);
             return Ok(result);
         }
@@ -48,17 +61,33 @@ namespace Backend.Controllers
         [HttpPost("eliminar")]
         public IActionResult DeleteAhorro([FromBody] AhorroDTO request)
         {
-            _ahorroService.DeleteAhorro(request.AhorroID.Value);
+            if (request.AhorroID == null || request.AhorroID <= 0)
+                return BadRequest("ID de ahorro inválido para eliminar.");
+
+            var dto = _ahorroService.DeleteAhorro(request.AhorroID.Value);
+            if (dto == null) return NotFound();
             return NoContent();
         }
 
         [HttpPost("detalle")]
         public IActionResult ObtenerMetaConDetalle([FromBody] AhorroDTO request)
         {
+            if (request.AhorroID == null || request.AhorroID <= 0)
+                return BadRequest("ID de ahorro inválido.");
+
             var dto = _ahorroService.ObtenerMetaConDetalle(request.AhorroID.Value);
             if (dto == null) return NotFound();
             return Ok(dto);
         }
 
+        [HttpGet("usuario/{usuarioId}/notificaciones")]
+        public IActionResult GetNotificaciones(int usuarioId)
+        {
+            if (usuarioId <= 0)
+                return BadRequest("ID de usuario inválido.");
+
+            var notis = _ahorroService.GetNotificaciones(usuarioId);
+            return Ok(notis);
+        }
     }
 }

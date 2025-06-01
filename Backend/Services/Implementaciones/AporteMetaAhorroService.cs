@@ -2,6 +2,9 @@
 using Backend.Services.Interfaces;
 using DAL.Interfaces;
 using Entidades.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Backend.Services.Implementaciones
 {
@@ -28,15 +31,15 @@ namespace Backend.Services.Implementaciones
             };
         }
 
-        private AporteMetaAhorro Convertir(AporteMetaAhorroDTO aporte)
+        private AporteMetaAhorro Convertir(AporteMetaAhorroDTO dto)
         {
             return new AporteMetaAhorro
             {
-                AporteId = aporte.AporteId ?? 0,
-                AhorroId = aporte.MetaAhorroId,
-                Fecha = aporte.Fecha,
-                Monto = aporte.Monto,
-                Observaciones = aporte.Observaciones
+                AporteId = dto.AporteId ?? 0,
+                AhorroId = dto.MetaAhorroId,
+                Fecha = dto.Fecha,
+                Monto = dto.Monto,
+                Observaciones = dto.Observaciones
             };
         }
 
@@ -44,45 +47,41 @@ namespace Backend.Services.Implementaciones
         {
             try
             {
-                if (aporte == null || aporte.Monto <= 0)
+                if (aporte == null || aporte.Monto <= 0 || aporte.MetaAhorroId <= 0)
                 {
                     _logger.LogWarning("Aporte inválido");
                     return null;
                 }
 
                 if (aporte.Fecha == default)
-                {
                     aporte.Fecha = DateTime.UtcNow;
-                }
 
                 var entity = Convertir(aporte);
                 var agregado = _unidad.AporteMetaAhorroDALImpl.Add(entity);
                 if (!agregado) return null;
 
-                _unidad.GuardarCambios();
-
-                // 1) Recuperar la meta padre
+                // Actualiza la meta en la misma transacción:
                 var meta = _unidad.AhorroDALImpl.FindById(entity.AhorroId);
                 if (meta != null)
                 {
                     meta.MontoActual += entity.Monto;
-                    // 2) Verificar si alcanzó hito. Por ejemplo:
-                    var porcentaje = meta.MontoObjetivo == 0 ? 0 : (meta.MontoActual / meta.MontoObjetivo) * 100;
-                    if (porcentaje >= 100 && !meta.Completado)
+                    var porcentaje = meta.MontoObjetivo == 0 ? 0
+                        : (meta.MontoActual / meta.MontoObjetivo) * 100m;
+
+                    if (porcentaje >= 100m && !meta.Completado)
                     {
                         meta.Completado = true;
                         meta.UltimaNotificacion = DateTime.UtcNow;
                     }
-                    else if (porcentaje >= 50 && meta.UltimaNotificacion == null)
+                    else if (porcentaje >= 50m && meta.UltimaNotificacion == null)
                     {
                         meta.UltimaNotificacion = DateTime.UtcNow;
                     }
-                    // 3) Guardar la meta actualizada
+
                     _unidad.AhorroDALImpl.UpdateAhorro(meta);
-                    _unidad.GuardarCambios();
                 }
 
-
+                _unidad.GuardarCambios();
                 return Convertir(entity);
             }
             catch (Exception ex)
@@ -117,38 +116,28 @@ namespace Backend.Services.Implementaciones
                     return false;
                 }
 
-                // Recuperar la meta asociada
                 var meta = _unidad.AhorroDALImpl.FindById(aporte.AhorroId);
                 if (meta == null)
                 {
-                    _logger.LogWarning($"No se encontró la meta asociada con ID {aporte.AhorroId}");
+                    _logger.LogWarning($"No se encontró la meta con ID {aporte.AhorroId}");
                     return false;
                 }
 
-                // Revertir el monto
                 meta.MontoActual -= aporte.Monto;
-                if (meta.MontoActual < 0)
-                    meta.MontoActual = 0;
+                if (meta.MontoActual < 0m)
+                    meta.MontoActual = 0m;
 
-                // Recalcular porcentaje
-                var porcentaje = meta.MontoObjetivo == 0 ? 0 : (meta.MontoActual / meta.MontoObjetivo) * 100;
+                var porcentaje = meta.MontoObjetivo == 0 ? 0
+                    : (meta.MontoActual / meta.MontoObjetivo) * 100m;
 
-                // Actualizar estado de completado
-                meta.Completado = porcentaje >= 100;
-
-                // Si ya no alcanza el 50%, limpiar notificación (opcional)
-                if (porcentaje < 50)
-                {
+                meta.Completado = porcentaje >= 100m;
+                if (porcentaje < 50m)
                     meta.UltimaNotificacion = null;
-                }
 
-                // Guardar cambios en meta
                 _unidad.AhorroDALImpl.UpdateAhorro(meta);
-                // Eliminar el aporte
                 _unidad.AporteMetaAhorroDALImpl.Remove(aporte);
 
                 _unidad.GuardarCambios();
-
                 return true;
             }
             catch (Exception ex)
@@ -172,18 +161,86 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        private void RecalcularMontoActual(int metaAhorroId)
+        public AporteMetaAhorroDTO UpdateAporte(AporteMetaAhorroDTO dto)
         {
-            var nuevoMonto = _unidad.AporteMetaAhorroDALImpl.ObtenerTotalAportado(metaAhorroId);
-            var meta = _unidad.AhorroDALImpl.FindById(metaAhorroId);
-            if (meta != null)
+            try
             {
-                meta.MontoActual = nuevoMonto;
-                meta.Completado = meta.MontoObjetivo > 0 && meta.MontoActual >= meta.MontoObjetivo;
+                if (dto == null || dto.AporteId == null || dto.AporteId <= 0 ||
+                    dto.MetaAhorroId <= 0 || dto.Monto <= 0)
+                {
+                    _logger.LogWarning("Datos inválidos para actualizar el aporte");
+                    return null;
+                }
+
+                var aporteExistente = _unidad.AporteMetaAhorroDALImpl.FindById(dto.AporteId.Value);
+                if (aporteExistente == null)
+                {
+                    _logger.LogWarning($"No existe aporte con ID {dto.AporteId.Value}");
+                    return null;
+                }
+
+                var meta = _unidad.AhorroDALImpl.FindById(aporteExistente.AhorroId);
+                if (meta == null)
+                {
+                    _logger.LogWarning($"No existe la meta con ID {aporteExistente.AhorroId}");
+                    return null;
+                }
+
+                meta.MontoActual -= aporteExistente.Monto;
+                if (meta.MontoActual < 0m)
+                    meta.MontoActual = 0m;
+
+                aporteExistente.Fecha = dto.Fecha == default ? DateTime.UtcNow : dto.Fecha;
+                aporteExistente.Monto = dto.Monto;
+                aporteExistente.Observaciones = dto.Observaciones;
+
+                _unidad.AporteMetaAhorroDALImpl.Update(aporteExistente);
+
+                meta.MontoActual += dto.Monto;
+
+                var porcentaje = meta.MontoObjetivo == 0 ? 0
+                    : (meta.MontoActual / meta.MontoObjetivo) * 100m;
+
+                if (porcentaje >= 100m && !meta.Completado)
+                {
+                    meta.Completado = true;
+                    meta.UltimaNotificacion = DateTime.UtcNow;
+                }
+                else if (porcentaje >= 50m && meta.UltimaNotificacion == null)
+                {
+                    meta.UltimaNotificacion = DateTime.UtcNow;
+                }
+                else if (porcentaje < 50m)
+                {
+                    meta.UltimaNotificacion = null;
+                    meta.Completado = false;
+                }
 
                 _unidad.AhorroDALImpl.UpdateAhorro(meta);
+
                 _unidad.GuardarCambios();
+
+                return Convertir(aporteExistente);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error al actualizar el aporte con ID {dto.AporteId}");
+                throw;
             }
         }
+
+        //private void RecalcularMontoActual(int metaAhorroId)
+        //{
+        //    var nuevoMonto = _unidad.AporteMetaAhorroDALImpl.ObtenerTotalAportado(metaAhorroId);
+        //    var meta = _unidad.AhorroDALImpl.FindById(metaAhorroId);
+        //    if (meta != null)
+        //    {
+        //        meta.MontoActual = nuevoMonto;
+        //        meta.Completado = meta.MontoObjetivo > 0 && meta.MontoActual >= meta.MontoObjetivo;
+
+        //        _unidad.AhorroDALImpl.UpdateAhorro(meta);
+        //        _unidad.GuardarCambios();
+        //    }
+        //}
     }
 }

@@ -47,5 +47,11 @@ namespace DAL.Implementaciones
                            .DefaultIfEmpty(0m)
                            .Sum();
         }
+
+        public bool Update(AporteMetaAhorro aporte)
+        {
+            _context.AporteMetaAhorros.Update(aporte);
+            return true;
+        }
     }
 }

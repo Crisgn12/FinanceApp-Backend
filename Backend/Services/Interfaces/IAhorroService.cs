@@ -10,10 +10,7 @@ namespace Backend.Services.Interfaces
         AhorroDTO AddAhorro(AhorroDTO ahorro);
         AhorroDTO UpdateAhorro(AhorroDTO ahorro);
         AhorroDTO DeleteAhorro(int ahorroId);
-
-        //void VerificarProgreso(Ahorro ahorro);
-
         AhorroDTO ObtenerMetaConDetalle(int ahorroId);
-
+        List<AhorroDTO> GetNotificaciones(int usuarioId);
     }
 }

@@ -61,7 +61,6 @@ namespace DAL.Implementaciones
             return ahorro;
         }
 
-
         public void DeleteAhorro(int ahorroId)
         {
             var ahorro = _context.Ahorros.Find(ahorroId);
@@ -82,7 +81,6 @@ namespace DAL.Implementaciones
             return _context.Ahorros.Where(a => a.UsuarioId == usuarioId).ToList();
         }
 
-
         public void ActualizarMontoActual(int ahorroId)
         {
             using var cmd = _context.Database.GetDbConnection().CreateCommand();
@@ -98,6 +96,5 @@ namespace DAL.Implementaciones
             cmd.ExecuteNonQuery();
             _context.Database.CloseConnection();
         }
-
     }
 }

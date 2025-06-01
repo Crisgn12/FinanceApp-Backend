@@ -1,10 +1,7 @@
-﻿using Azure.Core;
-using Backend.DTO;
+﻿using Backend.DTO;
 using Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Backend.Controllers
 {
@@ -46,7 +43,6 @@ namespace Backend.Controllers
         [HttpPost("eliminar")]
         public IActionResult DeleteAporte([FromBody] AporteMetaAhorroDTO req)
         {
-
             if (req.AporteId <= 0)
                 return BadRequest("ID de aporte inválido.");
 
@@ -57,5 +53,21 @@ namespace Backend.Controllers
             return Ok(new { mensaje = "Aporte eliminado correctamente." });
         }
 
+        // POST: api/AporteMetaAhorro/editar
+        [HttpPost("editar")]
+        public IActionResult UpdateAporte([FromBody] AporteMetaAhorroDTO dto)
+        {
+            if (dto == null || dto.AporteId == null || dto.AporteId <= 0
+                || dto.MetaAhorroId <= 0 || dto.Monto <= 0)
+            {
+                return BadRequest("Datos inválidos para actualizar el aporte.");
+            }
+
+            var actualizado = _service.UpdateAporte(dto);
+            if (actualizado == null)
+                return NotFound(new { mensaje = $"No existe aporte con ID {dto.AporteId}" });
+
+            return Ok(actualizado);
+        }
     }
 }

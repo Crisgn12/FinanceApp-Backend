@@ -16,7 +16,7 @@ namespace Backend.Services.Implementaciones
             _logger = logger;
         }
 
-        AhorroDTO Convertir(Ahorro ahorro)
+        private AhorroDTO Convertir(Ahorro ahorro)
         {
             return new AhorroDTO
             {
@@ -31,17 +31,17 @@ namespace Backend.Services.Implementaciones
             };
         }
 
-        Ahorro Convertir(AhorroDTO ahorro)
+        private Ahorro Convertir(AhorroDTO dto)
         {
             return new Ahorro
             {
-                AhorroId = ahorro.AhorroID ?? 0,
-                UsuarioId = ahorro.UsuarioID,
-                Nombre = ahorro.Nombre,
-                MontoObjetivo = ahorro.Monto_Objetivo,
-                MontoActual = ahorro.Monto_Actual,
-                FechaMeta = ahorro.Fecha_Meta,
-                Completado = ahorro.Completado,
+                AhorroId = dto.AhorroID ?? 0,
+                UsuarioId = dto.UsuarioID,
+                Nombre = dto.Nombre,
+                MontoObjetivo = dto.Monto_Objetivo,
+                MontoActual = dto.Monto_Actual,
+                FechaMeta = dto.Fecha_Meta,
+                Completado = dto.Completado,
                 CreatedAt = DateTime.UtcNow
             };
         }
@@ -54,7 +54,6 @@ namespace Backend.Services.Implementaciones
 
                 var entity = _unidadDeTrabajo.AhorroDALImpl.AddAhorro(Convertir(ahorro));
                 _unidadDeTrabajo.GuardarCambios();
-
                 return Convertir(entity);
             }
             catch (Exception ex)
@@ -73,11 +72,10 @@ namespace Backend.Services.Implementaciones
                 var entity = Convertir(ahorro);
                 entity.UpdatedAt = DateTime.UtcNow;
 
-                //VerificarProgreso(entity);
+                VerificarProgreso(entity);
 
                 _unidadDeTrabajo.AhorroDALImpl.UpdateAhorro(entity);
                 _unidadDeTrabajo.GuardarCambios();
-
                 return ahorro;
             }
             catch (Exception ex)
@@ -93,19 +91,16 @@ namespace Backend.Services.Implementaciones
             {
                 _logger.LogError("Ingresa a DeleteAhorro");
 
-                var ahorro = new Ahorro { AhorroId = id };
-
-                if (ahorro == null)
+                var entidadEnBd = _unidadDeTrabajo.AhorroDALImpl.FindById(id);
+                if (entidadEnBd == null)
                 {
                     _logger.LogWarning($"Ahorro con ID {id} no encontrado");
-
                     return null;
                 }
 
-                _unidadDeTrabajo.AhorroDALImpl.Remove(ahorro);
+                _unidadDeTrabajo.AhorroDALImpl.DeleteAhorro(id);
                 _unidadDeTrabajo.GuardarCambios();
-
-                return Convertir(ahorro);
+                return Convertir(entidadEnBd);
             }
             catch (Exception ex)
             {
@@ -121,11 +116,9 @@ namespace Backend.Services.Implementaciones
                 _logger.LogError("Ingresa a GetAhorroById");
 
                 var ahorro = _unidadDeTrabajo.AhorroDALImpl.FindById(id);
-
                 if (ahorro == null)
                 {
                     _logger.LogWarning($"Ahorro con ID {id} no encontrado");
-
                     return null;
                 }
 
@@ -144,15 +137,9 @@ namespace Backend.Services.Implementaciones
             {
                 _logger.LogError("Ingresa a GetAhorrosByUsuarioId");
 
-                var ahorros = _unidadDeTrabajo.AhorroDALImpl.GetAll();
-                List<AhorroDTO> ahorroDTOs = new List<AhorroDTO>();
-
-                foreach (var ahorro in ahorros)
-                {
-                    ahorroDTOs.Add(this.Convertir(ahorro));
-                }
-
-                return ahorroDTOs;
+                var ahorros = _unidadDeTrabajo.AhorroDALImpl.GetAhorros(usuarioId);
+                var dtoList = ahorros.Select(a => Convertir(a)).ToList();
+                return dtoList;
             }
             catch (Exception ex)
             {
@@ -164,7 +151,6 @@ namespace Backend.Services.Implementaciones
         private void VerificarProgreso(Ahorro ahorro)
         {
             var porcentaje = ahorro.MontoObjetivo == 0 ? 0 : (ahorro.MontoActual / ahorro.MontoObjetivo) * 100;
-
             if (porcentaje >= 100 && !ahorro.Completado)
             {
                 ahorro.Completado = true;
@@ -210,6 +196,16 @@ namespace Backend.Services.Implementaciones
                 _logger.LogError(ex, "Error al obtener detalle de meta de ahorro");
                 throw;
             }
+        }
+
+        public List<AhorroDTO> GetNotificaciones(int usuarioId)
+        {
+            var todas = _unidadDeTrabajo.AhorroDALImpl.GetAhorros(usuarioId);
+            var notis = todas
+                .Where(a => a.UltimaNotificacion.HasValue)
+                .Select(a => Convertir(a))
+                .ToList();
+            return notis;
         }
     }
 }

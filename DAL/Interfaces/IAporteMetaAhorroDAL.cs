@@ -6,5 +6,6 @@ namespace DAL.Interfaces
     {
         List<AporteMetaAhorro> ObtenerPorMeta(int metaAhorroId);
         decimal ObtenerTotalAportado(int metaAhorroId);
+        bool Update(AporteMetaAhorro aporte);
     }
 }
