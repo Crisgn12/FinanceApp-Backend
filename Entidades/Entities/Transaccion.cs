@@ -19,6 +19,8 @@ public partial class Transaccion
 
     public string Tipo { get; set; } = null!;
 
+    public string Titulo { get; set; } = null!;
+
     public DateTime? CreatedAt { get; set; }
 
     public virtual Categoria Categoria { get; set; } = null!;

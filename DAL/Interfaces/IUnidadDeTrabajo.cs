@@ -12,6 +12,8 @@ namespace DAL.Interfaces
         IUsuarioDAL UsuarioDAL { get; }
         IAhorroDAL AhorroDALImpl { get; }
         IAporteMetaAhorroDAL AporteMetaAhorroDALImpl { get; }
+        ICategoriaDAL CategoriaDAL { get; }
+        ITransaccionDAL TransaccionDAL { get; }
 
         // Metodos
 

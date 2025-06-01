@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // String de conexion a la base de datos
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("No se encontró la cadena de conexión 'DefaultConnection'.");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("No se encontrï¿½ la cadena de conexiï¿½n 'DefaultConnection'.");
 builder.Services.AddDbContext<FinanceAppContext>(options =>
     options.UseSqlServer(connectionString));
 
@@ -26,6 +26,12 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioDAL, UsuarioDAL>();
 builder.Services.AddScoped<IAhorroService, AhorroService>();
 builder.Services.AddScoped<IAhorroDAL, AhorroDALImpl>();
+builder.Services.AddScoped<IAporteMetaAhorroService, AporteMetaAhorroService>();
+builder.Services.AddScoped<IAporteMetaAhorroDAL, AporetMetaAhorroDALImpl>();
+builder.Services.AddScoped<ICategoriaDAL, CategoriaDAL>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<ITransaccionDAL, TransaccionDAL>();
+builder.Services.AddScoped<ITransaccionService, TransaccionService>();
 
 var app = builder.Build();
 
