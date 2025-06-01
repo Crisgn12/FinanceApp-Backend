@@ -36,7 +36,8 @@ namespace DAL.Implementaciones
             int filas = await _context.Database.ExecuteSqlRawAsync(
                 "EXEC dbo.SP_CREAR_PAGO_PROGRAMADO @UsuarioID,@Titulo,@Descripcion,@Monto,@FechaInicio,@Frecuencia,@FechaFin", p);
 
-            return filas >= 0;
+            // (-1 cuando SET NOCOUNT ON) o (>0 filas afectadas) → éxito
+            return filas == -1 || filas > 0;
         }
 
         /* --------------- Actualizar --------------- */
@@ -56,7 +57,7 @@ namespace DAL.Implementaciones
             int filas = await _context.Database.ExecuteSqlRawAsync(
                 "EXEC dbo.SP_ACTUALIZAR_PAGO_PROGRAMADO @PagoID,@UsuarioID,@Titulo,@Descripcion,@Monto,@Frecuencia,@Activo", p);
 
-            return filas >= 0;
+            return filas == -1 || filas > 0;
         }
 
         /* --------------- Eliminar --------------- */
@@ -71,7 +72,7 @@ namespace DAL.Implementaciones
             int filas = await _context.Database.ExecuteSqlRawAsync(
                 "EXEC dbo.SP_ELIMINAR_PAGO_PROGRAMADO @PagoID,@UsuarioID", p);
 
-            return filas >= 0;
+            return filas == -1 || filas > 0;
         }
 
         /* --------------- Listar (filtro general) --------------- */
@@ -85,20 +86,24 @@ namespace DAL.Implementaciones
                 new SqlParameter("@SoloActivos", (object?)f.SoloActivos ?? DBNull.Value)
             };
 
-            return await _context.Pagos
+            // Materializar primero con ToListAsync() y luego proyectar
+            var rows = await _context.Pagos
                 .FromSqlRaw("EXEC dbo.SP_OBTENER_PAGOS_PROGRAMADOS @UsuarioID,@FechaInicio,@FechaFin,@SoloActivos", p)
-                .Select(pago => new PagoProgramadoDTO
-                {
-                    PagoId = pago.PagoId,
-                    UsuarioId = pago.UsuarioId,
-                    Titulo = pago.Titulo,
-                    Descripcion = pago.Descripcion,
-                    Monto = pago.Monto,
-                    ProximoVencimiento = pago.ProximoVencimiento!.Value,
-                    Frecuencia = pago.Frecuencia!,
-                    Activo = pago.Activo
-                })
+                .AsNoTracking()
                 .ToListAsync();
+
+            return rows.Select(pago => new PagoProgramadoDTO
+            {
+                PagoId = pago.PagoId,
+                UsuarioId = pago.UsuarioId,
+                Titulo = pago.Titulo,
+                Descripcion = pago.Descripcion,
+                Monto = pago.Monto,
+                ProximoVencimiento = pago.ProximoVencimiento!.Value,
+                Frecuencia = pago.Frecuencia!,
+                Activo = pago.Activo
+            })
+            .ToList();
         }
 
         /* --------------- Listar próximos --------------- */
@@ -110,20 +115,24 @@ namespace DAL.Implementaciones
                 new SqlParameter("@Dias",      f.DiasAnticipacion)
             };
 
-            return await _context.Pagos
+            // Materializar primero con ToListAsync() y luego proyectar
+            var rows = await _context.Pagos
                 .FromSqlRaw("EXEC dbo.SP_OBTENER_PAGOS_PROXIMOS @UsuarioID,@Dias", p)
-                .Select(pago => new PagoProgramadoDTO
-                {
-                    PagoId = pago.PagoId,
-                    UsuarioId = pago.UsuarioId,
-                    Titulo = pago.Titulo,
-                    Descripcion = pago.Descripcion,
-                    Monto = pago.Monto,
-                    ProximoVencimiento = pago.ProximoVencimiento!.Value,
-                    Frecuencia = pago.Frecuencia!,
-                    Activo = pago.Activo
-                })
+                .AsNoTracking()
                 .ToListAsync();
+
+            return rows.Select(pago => new PagoProgramadoDTO
+            {
+                PagoId = pago.PagoId,
+                UsuarioId = pago.UsuarioId,
+                Titulo = pago.Titulo,
+                Descripcion = pago.Descripcion,
+                Monto = pago.Monto,
+                ProximoVencimiento = pago.ProximoVencimiento!.Value,
+                Frecuencia = pago.Frecuencia!,
+                Activo = pago.Activo
+            })
+            .ToList();
         }
     }
 }
