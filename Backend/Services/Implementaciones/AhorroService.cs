@@ -38,10 +38,10 @@ namespace Backend.Services.Implementaciones
                 AhorroId = dto.AhorroID ?? 0,
                 UsuarioId = dto.UsuarioID,
                 Nombre = dto.Nombre,
-                MontoObjetivo = dto.Monto_Objetivo,
-                MontoActual = dto.Monto_Actual,
+                MontoObjetivo = dto.Monto_Objetivo.Value,
+                MontoActual = dto.Monto_Actual.Value,
                 FechaMeta = dto.Fecha_Meta,
-                Completado = dto.Completado,
+                Completado = dto.Completado.Value,
                 CreatedAt = DateTime.UtcNow
             };
         }
@@ -63,20 +63,43 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        public AhorroDTO UpdateAhorro(AhorroDTO ahorro)
+        public AhorroDTO UpdateAhorro(AhorroDTO dto)
         {
             try
             {
                 _logger.LogError("Ingresa a UpdateAhorro");
 
-                var entity = Convertir(ahorro);
+                if (dto.AhorroID == null || dto.AhorroID <= 0)
+                    throw new ArgumentException("ID de ahorro inválido.");
+
+                var entity = _unidadDeTrabajo.AhorroDALImpl.FindById(dto.AhorroID.Value);
+                if (entity == null)
+                    throw new Exception("No se encontró el ahorro con el ID especificado.");
+
+                // Solo actualiza los campos que vienen en el DTO
+                if (!string.IsNullOrWhiteSpace(dto.Nombre))
+                    entity.Nombre = dto.Nombre;
+
+                if (dto.Monto_Objetivo.HasValue)
+                    entity.MontoObjetivo = dto.Monto_Objetivo.Value;
+
+                if (dto.Monto_Actual.HasValue)
+                    entity.MontoActual = dto.Monto_Actual.Value;
+
+                if (dto.Completado.HasValue)
+                    entity.Completado = dto.Completado.Value;
+
+                if (dto.Fecha_Meta.HasValue)
+                    entity.FechaMeta = dto.Fecha_Meta;
+
                 entity.UpdatedAt = DateTime.UtcNow;
 
                 VerificarProgreso(entity);
 
                 _unidadDeTrabajo.AhorroDALImpl.UpdateAhorro(entity);
                 _unidadDeTrabajo.GuardarCambios();
-                return ahorro;
+
+                return Convertir(entity);
             }
             catch (Exception ex)
             {

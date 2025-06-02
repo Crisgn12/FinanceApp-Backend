@@ -27,7 +27,7 @@ builder.Services.AddScoped<IUsuarioDAL, UsuarioDAL>();
 builder.Services.AddScoped<IAhorroService, AhorroService>();
 builder.Services.AddScoped<IAhorroDAL, AhorroDALImpl>();
 builder.Services.AddScoped<IAporteMetaAhorroService, AporteMetaAhorroService>();
-builder.Services.AddScoped<IAporteMetaAhorroDAL, AporetMetaAhorroDALImpl>();
+builder.Services.AddScoped<IAporteMetaAhorroDAL, AporteMetaAhorroDALImpl>();
 builder.Services.AddScoped<ICategoriaDAL, CategoriaDAL>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<ITransaccionDAL, TransaccionDAL>();

@@ -14,7 +14,6 @@ public partial class FinanceAppContext : DbContext
         : base(options)
     {
     }
-
     public virtual DbSet<Ahorro> Ahorros { get; set; }
     public virtual DbSet<AporteMetaAhorro> AporteMetaAhorros { get; set; }
 
@@ -36,7 +35,6 @@ public partial class FinanceAppContext : DbContext
     {
         base.OnConfiguring(optionsBuilder);
     }
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -66,8 +64,11 @@ public partial class FinanceAppContext : DbContext
             entity.Property(e => e.UltimaNotificacion)
                .HasColumnType("datetime")
                .IsRequired(false);
+            entity.Property(e => e.FechaMeta)
+               .HasColumnType("datetime")
+               .HasColumnName("Fecha_Meta");
             entity.HasMany(e => e.Aportes)
-               .WithOne(e => e.MetaAhorro)
+               .WithOne(e => e.Ahorro)
                .HasForeignKey(e => e.MetaAhorroId)
                .OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(d => d.Usuario).WithMany(p => p.Ahorros)
@@ -79,31 +80,26 @@ public partial class FinanceAppContext : DbContext
         modelBuilder.Entity<AporteMetaAhorro>(entity =>
         {
             entity.HasKey(e => e.AporteId).HasName("PK__AporteMetaAhorro");
-
             entity.ToTable("AporteMetaAhorro");
 
             entity.Property(e => e.AporteId).HasColumnName("AporteId");
-
             entity.Property(e => e.MetaAhorroId).HasColumnName("MetaAhorroId");
-
             entity.Property(e => e.Fecha)
                 .HasColumnType("date")
                 .HasDefaultValueSql("(getdate())");
-
             entity.Property(e => e.Monto)
                 .HasColumnType("decimal(18, 2)");
-
             entity.Property(e => e.Observaciones)
                 .HasMaxLength(255)
                 .IsUnicode();
 
-            entity.HasOne(d => d.MetaAhorro)
-                .WithMany()
+            // CONFIGURACIÓN CORREGIDA DE LA RELACIÓN
+            entity.HasOne(d => d.Ahorro)
+                .WithMany(p => p.Aportes) 
                 .HasForeignKey(d => d.MetaAhorroId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AporteMetaAhorro_Ahorro");
         });
-
 
         modelBuilder.Entity<Categoria>(entity =>
         {

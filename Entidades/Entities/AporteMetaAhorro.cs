@@ -4,7 +4,7 @@
     {
         public int AporteId { get; set; }
 
-        public int AhorroId { get; set; }
+        public int MetaAhorroId { get; set; }
 
         public DateTime Fecha { get; set; }
 

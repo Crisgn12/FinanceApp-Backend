@@ -22,20 +22,22 @@ namespace DAL.Implementaciones
             ahorro.Completado = false;
             ahorro.UltimaNotificacion = null;
 
-            var query = "EXEC SP_ADD_AHORRO @UsuarioId, @Nombre, @Monto_Objetivo, @Fecha_Meta, @IdAhorro OUT";
+            var query = "EXEC SP_ADD_AHORRO @UsuarioId, @Nombre, @Monto_Objetivo, @Monto_Actual, @Completado, @Fecha_Meta, @IdAhorro OUT";
 
             var parameters = new[]
             {
                 new SqlParameter("@UsuarioId", ahorro.UsuarioId),
                 new SqlParameter("@Nombre", ahorro.Nombre),
                 new SqlParameter("@Monto_Objetivo", ahorro.MontoObjetivo),
+                new SqlParameter("@Monto_Actual", ahorro.MontoActual),
+                new SqlParameter("@Completado", ahorro.Completado),
                 new SqlParameter("@Fecha_Meta", ahorro.FechaMeta ?? (object)DBNull.Value),
-                new SqlParameter("@IdAhorro", System.Data.SqlDbType.Int) { Direction = System.Data.ParameterDirection.Output }
+                new SqlParameter("@IdAhorro", SqlDbType.Int) { Direction = ParameterDirection.Output }
             };
 
             _context.Database.ExecuteSqlRaw(query, parameters);
 
-            ahorro.AhorroId = (int)parameters[4].Value;
+            ahorro.AhorroId = (int)parameters[6].Value;
             return ahorro;
         }
 
@@ -55,7 +57,6 @@ namespace DAL.Implementaciones
             new SqlParameter("@Fecha_Meta", ahorro.FechaMeta ?? (object)DBNull.Value),
             new SqlParameter("@Ultima_Notificacion", ahorro.UltimaNotificacion ?? (object)DBNull.Value)
         };
-            //REVISAR SP EN LA BD
             _context.Database.ExecuteSqlRaw(query, parameters);
 
             return ahorro;

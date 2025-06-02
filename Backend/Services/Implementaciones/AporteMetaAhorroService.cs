@@ -24,7 +24,7 @@ namespace Backend.Services.Implementaciones
             return new AporteMetaAhorroDTO
             {
                 AporteId = aporte.AporteId,
-                MetaAhorroId = aporte.AhorroId,
+                MetaAhorroId = aporte.MetaAhorroId,
                 Fecha = aporte.Fecha,
                 Monto = aporte.Monto,
                 Observaciones = aporte.Observaciones
@@ -36,7 +36,7 @@ namespace Backend.Services.Implementaciones
             return new AporteMetaAhorro
             {
                 AporteId = dto.AporteId ?? 0,
-                AhorroId = dto.MetaAhorroId,
+                MetaAhorroId = dto.MetaAhorroId,
                 Fecha = dto.Fecha,
                 Monto = dto.Monto,
                 Observaciones = dto.Observaciones
@@ -61,7 +61,7 @@ namespace Backend.Services.Implementaciones
                 if (!agregado) return null;
 
                 // Actualiza la meta en la misma transacción:
-                var meta = _unidad.AhorroDALImpl.FindById(entity.AhorroId);
+                var meta = _unidad.AhorroDALImpl.FindById(entity.MetaAhorroId);
                 if (meta != null)
                 {
                     meta.MontoActual += entity.Monto;
@@ -116,10 +116,10 @@ namespace Backend.Services.Implementaciones
                     return false;
                 }
 
-                var meta = _unidad.AhorroDALImpl.FindById(aporte.AhorroId);
+                var meta = _unidad.AhorroDALImpl.FindById(aporte.MetaAhorroId);
                 if (meta == null)
                 {
-                    _logger.LogWarning($"No se encontró la meta con ID {aporte.AhorroId}");
+                    _logger.LogWarning($"No se encontró la meta con ID {aporte.MetaAhorroId}");
                     return false;
                 }
 
@@ -179,10 +179,10 @@ namespace Backend.Services.Implementaciones
                     return null;
                 }
 
-                var meta = _unidad.AhorroDALImpl.FindById(aporteExistente.AhorroId);
+                var meta = _unidad.AhorroDALImpl.FindById(aporteExistente.MetaAhorroId);
                 if (meta == null)
                 {
-                    _logger.LogWarning($"No existe la meta con ID {aporteExistente.AhorroId}");
+                    _logger.LogWarning($"No existe la meta con ID {aporteExistente.MetaAhorroId}");
                     return null;
                 }
 
@@ -228,19 +228,5 @@ namespace Backend.Services.Implementaciones
                 throw;
             }
         }
-
-        //private void RecalcularMontoActual(int metaAhorroId)
-        //{
-        //    var nuevoMonto = _unidad.AporteMetaAhorroDALImpl.ObtenerTotalAportado(metaAhorroId);
-        //    var meta = _unidad.AhorroDALImpl.FindById(metaAhorroId);
-        //    if (meta != null)
-        //    {
-        //        meta.MontoActual = nuevoMonto;
-        //        meta.Completado = meta.MontoObjetivo > 0 && meta.MontoActual >= meta.MontoObjetivo;
-
-        //        _unidad.AhorroDALImpl.UpdateAhorro(meta);
-        //        _unidad.GuardarCambios();
-        //    }
-        //}
     }
 }

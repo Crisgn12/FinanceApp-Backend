@@ -34,7 +34,7 @@ namespace DAL.Implementaciones
         public List<AporteMetaAhorro> ObtenerPorMeta(int metaAhorroId)
         {
             return _context.AporteMetaAhorros
-                           .Where(a => a.AhorroId == metaAhorroId)
+                           .Where(a => a.MetaAhorroId == metaAhorroId)
                            .OrderBy(a => a.Fecha)
                            .ToList();
         }
@@ -42,7 +42,7 @@ namespace DAL.Implementaciones
         public decimal ObtenerTotalAportado(int ahorroId)
         {
             return _context.AporteMetaAhorros
-                           .Where(a => a.AhorroId == ahorroId)
+                           .Where(a => a.MetaAhorroId == ahorroId)
                            .Select(a => a.Monto)
                            .DefaultIfEmpty(0m)
                            .Sum();
