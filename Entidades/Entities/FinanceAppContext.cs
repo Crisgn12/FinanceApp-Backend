@@ -171,25 +171,62 @@ public partial class FinanceAppContext : DbContext
 
             entity.Property(e => e.PagoId).HasColumnName("PagoID");
             entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime")
-                .HasColumnName("Created_at");
+                  .HasDefaultValueSql("(getdate())")
+                  .HasColumnType("datetime")
+                  .HasColumnName("Created_at");
+
             entity.Property(e => e.Descripcion).HasColumnType("text");
+
             entity.Property(e => e.Estado)
-                .HasMaxLength(10)
-                .IsUnicode(false);
-            entity.Property(e => e.FechaVencimiento).HasColumnName("Fecha_Vencimiento");
-            entity.Property(e => e.Monto).HasColumnType("decimal(10, 2)");
+                  .HasMaxLength(10)
+                  .IsUnicode(false);
+
+            entity.Property(e => e.FechaVencimiento)
+                  .HasColumnName("Fecha_Vencimiento")
+                  .HasColumnType("date");
+
+            entity.Property(e => e.Monto)
+                  .HasColumnType("decimal(10, 2)");
+
             entity.Property(e => e.Titulo)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+                  .HasMaxLength(100)
+                  .IsUnicode(false);
+
             entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
 
+            entity.Property(e => e.EsProgramado)
+                  .HasColumnName("EsProgramado")
+                  .HasColumnType("bit")
+                  .HasDefaultValueSql("((0))");
+
+            entity.Property(e => e.Frecuencia)
+                  .HasColumnName("Frecuencia")
+                  .HasMaxLength(20)
+                  .IsUnicode(false);
+
+            entity.Property(e => e.FechaInicio)
+                  .HasColumnName("FechaInicio")
+                  .HasColumnType("date");
+
+            entity.Property(e => e.FechaFin)
+                  .HasColumnName("FechaFin")
+                  .HasColumnType("date");
+
+            entity.Property(e => e.ProximoVencimiento)
+                  .HasColumnName("ProximoVencimiento")
+                  .HasColumnType("date");
+
+            entity.Property(e => e.Activo)
+                  .HasColumnName("Activo")
+                  .HasColumnType("bit")
+                  .HasDefaultValueSql("((1))");
+
             entity.HasOne(d => d.Usuario).WithMany(p => p.Pagos)
-                .HasForeignKey(d => d.UsuarioId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Pago_Usuario");
+                  .HasForeignKey(d => d.UsuarioId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("FK_Pago_Usuario");
         });
+
 
         modelBuilder.Entity<Presupuesto>(entity =>
         {

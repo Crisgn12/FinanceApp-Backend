@@ -43,6 +43,8 @@ builder.Services.AddScoped<ICategoriaDAL, CategoriaDAL>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<ITransaccionDAL, TransaccionDAL>();
 builder.Services.AddScoped<ITransaccionService, TransaccionService>();
+builder.Services.AddScoped<IPagoProgramadoDAL, PagoProgramadoDAL>();
+builder.Services.AddScoped<IPagoProgramadoService, PagoProgramadoService>();
 
 var app = builder.Build();
 
