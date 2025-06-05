@@ -8,7 +8,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]                           // Quita o ajusta si aún no usas JWT
+    [Authorize]                          
     public class PagoProgramadoController : ControllerBase
     {
         private readonly IPagoProgramadoService _service;

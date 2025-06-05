@@ -8,7 +8,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class AhorroController : ControllerBase
     {
         private readonly IAhorroService _ahorroService;
