@@ -33,9 +33,9 @@ namespace Backend.Controllers
 
         // POST: api/AporteMetaAhorro/porMeta
         [HttpPost("porMeta")]
-        public IActionResult GetAporteByMeta([FromBody] AhorroDTO request)
+        public IActionResult GetAporteByMeta([FromBody] AporteMetaAhorroDTO request)
         {
-            var lista = _service.GetAportesByMeta(request.AhorroID.Value);
+            var lista = _service.GetAportesByMeta(request.MetaAhorroId);
             return Ok(lista);
         }
 

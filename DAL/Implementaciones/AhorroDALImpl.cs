@@ -45,14 +45,13 @@ namespace DAL.Implementaciones
         {
             ahorro.UpdatedAt = DateTime.UtcNow;
 
-            var query = "EXEC SP_UPDATE_AHORRO @AhorroID, @Nombre, @Monto_Objetivo, @Monto_Actual, @Completado, @Fecha_Meta, @Ultima_Notificacion";
+            var query = "EXEC SP_UPDATE_AHORRO @AhorroID, @Nombre, @Monto_Objetivo, @Completado, @Fecha_Meta, @Ultima_Notificacion";
 
             var parameters = new[]
             {
             new SqlParameter("@AhorroID", ahorro.AhorroId),
             new SqlParameter("@Nombre", ahorro.Nombre),
             new SqlParameter("@Monto_Objetivo", ahorro.MontoObjetivo),
-            new SqlParameter("@Monto_Actual", ahorro.MontoActual),
             new SqlParameter("@Completado", ahorro.Completado),
             new SqlParameter("@Fecha_Meta", ahorro.FechaMeta ?? (object)DBNull.Value),
             new SqlParameter("@Ultima_Notificacion", ahorro.UltimaNotificacion ?? (object)DBNull.Value)
