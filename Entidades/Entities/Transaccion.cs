@@ -7,7 +7,7 @@ public partial class Transaccion
 {
     public int TransaccionId { get; set; }
 
-    public int UsuarioId { get; set; }
+    public string? UsuarioId { get; set; }
 
     public int CategoriaId { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Transaccion
 
     public virtual Categoria Categoria { get; set; } = null!;
 
-    public virtual Usuario Usuario { get; set; } = null!;
+    //public virtual Usuario Usuario { get; set; } = null!;
 }

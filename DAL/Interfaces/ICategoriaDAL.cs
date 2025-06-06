@@ -10,7 +10,7 @@ namespace DAL.Interfaces
 {
     public interface ICategoriaDAL: IDALGenerico<Categoria>
     {
-        Task<IEnumerable<Categoria>> ObtenerCategoriasPorUsuario(int UsuarioID);
+        Task<IEnumerable<Categoria>> ObtenerCategoriasPorUsuario(string UsuarioID);
         Task<bool> CrearCategoriaPersonalizada(CategoriaDTO categoria);
         Task<bool> ActualizarCategoria(CategoriaDTO categoria);
         Task<bool> EliminarCategoria(BorrarCategoriaDTO req);

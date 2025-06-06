@@ -8,7 +8,7 @@ namespace Entidades.DTOs
 {
     public class ObtenerTransaccionesPorUsuarioDTO
     {
-        public int UsuarioId { get; set; }
+        public string? UsuarioId { get; set; }
         public DateOnly? FechaInicio { get; set; }
         public DateOnly? FechaFin { get; set; }
         public string? NombreCategoria { get; set; }

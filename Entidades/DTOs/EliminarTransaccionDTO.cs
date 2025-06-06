@@ -9,6 +9,6 @@ namespace Entidades.DTOs
     public class EliminarTransaccionDTO
     {
         public int TransaccionID { get; set; }
-        public int UsuarioID { get; set; }
+        public string? UsuarioID { get; set; }
     }
 }

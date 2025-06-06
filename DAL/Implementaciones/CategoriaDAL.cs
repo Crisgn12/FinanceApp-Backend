@@ -20,9 +20,20 @@ namespace DAL.Implementaciones
             _context = context;
         }
 
-        public async Task<IEnumerable<Categoria>> ObtenerCategoriasPorUsuario(int UsuarioID)
+        public async Task<IEnumerable<Categoria>> ObtenerCategoriasPorUsuario(string UsuarioID)
         {
-            return await _context.Categorias.FromSqlRaw("EXEC SP_OBTENER_CATEGORIAS_POR_USUARIO @UsuarioID = {0}", UsuarioID).ToListAsync();
+            try
+            {
+                var parameter = new SqlParameter("@UsuarioID", UsuarioID ?? (object)DBNull.Value);
+                var result = await _context.Categorias
+                    .FromSqlRaw("EXEC SP_OBTENER_CATEGORIAS_POR_USUARIO @UsuarioID", parameter)
+                    .ToListAsync();
+                return result;
+            }
+            catch (SqlException)
+            {
+                return new List<Categoria>();
+            }
         }
 
         public async Task<bool> CrearCategoriaPersonalizada(CategoriaDTO categoria)

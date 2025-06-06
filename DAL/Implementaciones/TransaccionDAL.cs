@@ -117,7 +117,7 @@ namespace DAL.Implementaciones
                 {
                     throw new ArgumentException("El ID de la transacción es obligatorio.");
                 }
-                if (transaccionDTO.UsuarioId <= 0)
+                if (string.IsNullOrEmpty(transaccionDTO.UsuarioId))
                 {
                     throw new ArgumentException("El ID del usuario es obligatorio.");
                 }

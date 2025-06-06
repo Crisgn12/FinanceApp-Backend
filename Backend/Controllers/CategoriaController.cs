@@ -20,10 +20,10 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerCategoriasPorUsuario/{usuarioID}")]
-        public async Task<IActionResult> ObtenerCategoriasPorUsuario(int usuarioID)
+        [Route("ObtenerCategoriasPorUsuario")]
+        public async Task<IActionResult> ObtenerCategoriasPorUsuario()
         {
-            return Ok(await _categoriaService.ObtenerCategoriasPorUsuarioID(usuarioID));
+            return Ok(await _categoriaService.ObtenerCategoriasPorUsuarioID());
         }
 
         [HttpPost]

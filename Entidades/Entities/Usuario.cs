@@ -21,7 +21,7 @@ public partial class Usuario
 
     //public virtual ICollection<Ahorro> Ahorros { get; set; } = new List<Ahorro>();
 
-    public virtual ICollection<Categoria> Categoria { get; set; } = new List<Categoria>();
+    //public virtual ICollection<Categoria> Categoria { get; set; } = new List<Categoria>();
 
     public virtual ICollection<Informe> Informes { get; set; } = new List<Informe>();
 
@@ -31,5 +31,5 @@ public partial class Usuario
 
     public virtual ICollection<Presupuesto> Presupuestos { get; set; } = new List<Presupuesto>();
 
-    public virtual ICollection<Transaccion> Transacciones { get; set; } = new List<Transaccion>();
+    //public virtual ICollection<Transaccion> Transacciones { get; set; } = new List<Transaccion>();
 }

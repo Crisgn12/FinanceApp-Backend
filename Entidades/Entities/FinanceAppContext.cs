@@ -113,10 +113,10 @@ public partial class FinanceAppContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
 
-            entity.HasOne(d => d.Usuario).WithMany(p => p.Categoria)
-                .HasForeignKey(d => d.UsuarioId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Categoria_Usuario");
+            //entity.HasOne(d => d.Usuario).WithMany(p => p.Categoria)
+            //    .HasForeignKey(d => d.UsuarioId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_Categoria_Usuario");
         });
 
         modelBuilder.Entity<Informe>(entity =>
@@ -276,10 +276,10 @@ public partial class FinanceAppContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Transaccion_Categoria");
 
-            entity.HasOne(d => d.Usuario).WithMany(p => p.Transacciones)
-                .HasForeignKey(d => d.UsuarioId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Transaccion_Usuario");
+            //entity.HasOne(d => d.Usuario).WithMany(p => p.Transacciones)
+            //    .HasForeignKey(d => d.UsuarioId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_Transaccion_Usuario");
         });
 
         modelBuilder.Entity<Usuario>(entity =>
