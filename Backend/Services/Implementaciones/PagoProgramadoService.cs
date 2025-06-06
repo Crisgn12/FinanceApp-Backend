@@ -35,8 +35,12 @@ namespace Backend.Services.Implementaciones
             return _repo.CrearPagoProgramadoAsync(dto);
         }
 
-        public Task<bool> ActualizarAsync(PagoProgramadoDTO dto) =>
-            _repo.ActualizarPagoProgramadoAsync(dto);
+        public Task<bool> ActualizarAsync(PagoProgramadoDTO dto)
+        {
+            var userId = GetCurrentUserId();
+            dto.UsuarioId = userId;
+            return _repo.ActualizarPagoProgramadoAsync(dto);
+        }
 
         public Task<bool> EliminarAsync(int pagoId)
         {
@@ -44,11 +48,18 @@ namespace Backend.Services.Implementaciones
             return _repo.EliminarPagoProgramadoAsync(pagoId, usuarioId);
         }
 
-        public Task<List<PagoProgramadoDTO>> ListarAsync(FiltroPagosProgramadosDTO filtro) =>
-            _repo.ObtenerPagosProgramadosAsync(filtro);
+        public Task<List<PagoProgramadoDTO>> ListarAsync(FiltroPagosProgramadosDTO filtro)
+        {
+            var userId = GetCurrentUserId();
+            filtro.UsuarioId = userId;
+            return _repo.ObtenerPagosProgramadosAsync(filtro);
+        }
 
-        public Task<List<PagoProgramadoDTO>> ListarProximosAsync(FiltroPagosProximosDTO filtro) =>
-            _repo.ObtenerPagosProximosAsync(filtro);
+        public Task<List<PagoProgramadoDTO>> ListarProximosAsync(FiltroPagosProximosDTO filtro) {
+            var userId = GetCurrentUserId();
+            filtro.UsuarioId = userId;
+            return _repo.ObtenerPagosProximosAsync(filtro);
+        }
 
         private string GetCurrentUserId()
         {

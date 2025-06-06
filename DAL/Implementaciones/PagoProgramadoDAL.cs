@@ -51,13 +51,26 @@ namespace DAL.Implementaciones
                 new SqlParameter("@Descripcion",(object?)dto.Descripcion ?? DBNull.Value),
                 new SqlParameter("@Monto",      dto.Monto),
                 new SqlParameter("@Frecuencia", dto.Frecuencia),
-                new SqlParameter("@Activo",     dto.Activo)
+                new SqlParameter("@FechaInicio", dto.FechaInicio.HasValue ? (object)dto.FechaInicio.Value : DBNull.Value),
+                new SqlParameter("@FechaFin",    dto.FechaFin.HasValue    ? (object)dto.FechaFin.Value    : DBNull.Value),
+                new SqlParameter("@Activo",      dto.Activo)
             };
 
-            int filas = await _context.Database.ExecuteSqlRawAsync(
-                "EXEC dbo.SP_ACTUALIZAR_PAGO_PROGRAMADO @PagoID,@UsuarioID,@Titulo,@Descripcion,@Monto,@Frecuencia,@Activo", p);
+            var sql = @"
+                EXEC dbo.SP_ACTUALIZAR_PAGO_PROGRAMADO 
+                    @PagoID       = @PagoID,
+                    @UsuarioID    = @UsuarioID,
+                    @Titulo       = @Titulo,
+                    @Descripcion  = @Descripcion,
+                    @Monto        = @Monto,
+                    @Frecuencia   = @Frecuencia,
+                    @FechaInicio  = @FechaInicio,
+                    @FechaFin     = @FechaFin,
+                    @Activo       = @Activo;
+            ";
 
-            return filas == -1 || filas > 0;
+            int filas = await _context.Database.ExecuteSqlRawAsync(sql, p);
+            return filas > 0;
         }
 
         /* --------------- Eliminar --------------- */

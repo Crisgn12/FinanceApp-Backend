@@ -10,7 +10,7 @@ namespace Entidades.DTOs;
 
 public class FiltroPagosProgramadosDTO
 {
-    public string UsuarioId { get; set; }
+    public string? UsuarioId { get; set; }
     public DateOnly? FechaInicio { get; set; }
     public DateOnly? FechaFin { get; set; }
     public bool? SoloActivos { get; set; }
