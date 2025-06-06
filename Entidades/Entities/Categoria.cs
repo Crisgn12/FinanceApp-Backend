@@ -7,7 +7,7 @@ public partial class Categoria
 {
     public int CategoriaId { get; set; }
 
-    public int? UsuarioId { get; set; }
+    public string? UsuarioId { get; set; }
 
     public string Nombre { get; set; } = null!;
 

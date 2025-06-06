@@ -27,7 +27,7 @@ namespace Backend.Services.Implementaciones
             };
         }
 
-        public async Task<IEnumerable<CategoriaDTO>> ObtenerCategoriasPorUsuarioID(int usuarioID)
+        public async Task<IEnumerable<CategoriaDTO>> ObtenerCategoriasPorUsuarioID(string usuarioID)
         {
             var categorias = await _unidadDeTrabajo.CategoriaDAL.ObtenerCategoriasPorUsuario(usuarioID);
             var listaCategorias = new List<CategoriaDTO>();

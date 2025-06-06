@@ -10,7 +10,7 @@ namespace Entidades.DTOs
     {
         public int? CategoriaID { get; set; }
 
-        public int? UsuarioID { get; set; }
+        public string? UsuarioID { get; set; }
 
         public string Nombre { get; set; } = null!;
 

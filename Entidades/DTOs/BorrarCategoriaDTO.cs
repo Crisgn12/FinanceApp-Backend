@@ -9,6 +9,6 @@ namespace Entidades.DTOs
     public class BorrarCategoriaDTO
     {
         public int CategoriaID { get; set; }
-        public int UsuarioID { get; set; }
+        public string? UsuarioID { get; set; }
     }
 }
