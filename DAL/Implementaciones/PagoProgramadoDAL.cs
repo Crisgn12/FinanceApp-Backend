@@ -61,7 +61,7 @@ namespace DAL.Implementaciones
         }
 
         /* --------------- Eliminar --------------- */
-        public async Task<bool> EliminarPagoProgramadoAsync(int pagoId, int usuarioId)
+        public async Task<bool> EliminarPagoProgramadoAsync(int pagoId, string usuarioId)
         {
             var p = new[]
             {

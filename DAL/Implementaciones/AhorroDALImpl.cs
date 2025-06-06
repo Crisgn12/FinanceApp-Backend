@@ -88,7 +88,7 @@ namespace DAL.Implementaciones
             cmd.CommandType = CommandType.StoredProcedure;
 
             var param = cmd.CreateParameter();
-            param.ParameterName = "@AhorroID";
+            param.ParameterName = "@MetaAhorroId";
             param.Value = ahorroId;
             cmd.Parameters.Add(param);
 

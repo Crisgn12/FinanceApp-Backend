@@ -9,7 +9,7 @@ namespace Entidades.DTOs;
 public class PagoProgramadoDTO
 {
     public int PagoId { get; set; }
-    public int UsuarioId { get; set; }
+    public string UsuarioId { get; set; }
     public string Titulo { get; set; } = null!;
     public string? Descripcion { get; set; }
     public decimal Monto { get; set; }

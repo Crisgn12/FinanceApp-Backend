@@ -7,7 +7,7 @@ public partial class Notificacion
 {
     public int NotificacionId { get; set; }
 
-    public int UsuarioId { get; set; }
+    public string UsuarioId { get; set; }
 
     public string Mensaje { get; set; } = null!;
 
@@ -15,5 +15,5 @@ public partial class Notificacion
 
     public DateTime? CreatedAt { get; set; }
 
-    public virtual Usuario Usuario { get; set; } = null!;
+   // public virtual Usuario Usuario { get; set; } = null!;
 }
