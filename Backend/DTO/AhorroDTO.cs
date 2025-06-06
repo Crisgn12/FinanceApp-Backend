@@ -3,7 +3,7 @@
     public class AhorroDTO
     {
         public int? AhorroID { get; set; }     
-        public int UsuarioID { get; set; }
+        public string? UsuarioID { get; set; }
         public string? Nombre { get; set; }
         public decimal? Monto_Objetivo { get; set; }
         public decimal? Monto_Actual { get; set; } = 0;

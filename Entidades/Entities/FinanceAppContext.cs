@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Entidades.Entities;
@@ -71,11 +72,9 @@ public partial class FinanceAppContext : DbContext
                .WithOne(e => e.Ahorro)
                .HasForeignKey(e => e.MetaAhorroId)
                .OnDelete(DeleteBehavior.Cascade);
-            entity.HasOne(d => d.Usuario).WithMany(p => p.Ahorros)
-                .HasForeignKey(d => d.UsuarioId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Ahorro_Usuario");
         });
+
+        modelBuilder.Ignore<Usuario>();
 
         modelBuilder.Entity<AporteMetaAhorro>(entity =>
         {

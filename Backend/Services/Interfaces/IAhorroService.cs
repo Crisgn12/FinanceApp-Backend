@@ -5,12 +5,12 @@ namespace Backend.Services.Interfaces
 {
     public interface IAhorroService
     {
-        List<AhorroDTO> GetAhorros(int usuarioId);
+        List<AhorroDTO> GetAhorros();
         AhorroDTO GetAhorroById(int ahorroId);
         AhorroDTO AddAhorro(AhorroDTO ahorro);
         AhorroDTO UpdateAhorro(AhorroDTO ahorro);
         AhorroDTO DeleteAhorro(int ahorroId);
         AhorroDTO ObtenerMetaConDetalle(int ahorroId);
-        List<AhorroDTO> GetNotificaciones(int usuarioId);
+        List<AhorroDTO> GetNotificaciones();
     }
 }

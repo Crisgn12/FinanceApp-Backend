@@ -1,10 +1,15 @@
-﻿namespace Entidades.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Entidades.Entities;
 
 public partial class Ahorro
 {
+    [Column("AhorroID")]
     public int AhorroId { get; set; }
 
-    public int UsuarioId { get; set; }
+    [Column("UsuarioID")]
+    public string UsuarioId { get; set; }
 
     public string? Nombre { get; set; } = null!;
 
@@ -21,7 +26,5 @@ public partial class Ahorro
     public DateTime? FechaMeta { get; set; }
 
     public DateTime? UltimaNotificacion { get; set; }
-
-    public virtual Usuario Usuario { get; set; } = null!;
     public virtual ICollection<AporteMetaAhorro> Aportes { get; set; } = new List<AporteMetaAhorro>();
 }

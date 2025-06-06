@@ -19,7 +19,7 @@ public partial class Usuario
 
     public DateTime? FechaCreacion { get; set; }
 
-    public virtual ICollection<Ahorro> Ahorros { get; set; } = new List<Ahorro>();
+    //public virtual ICollection<Ahorro> Ahorros { get; set; } = new List<Ahorro>();
 
     public virtual ICollection<Categoria> Categoria { get; set; } = new List<Categoria>();
 

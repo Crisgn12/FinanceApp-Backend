@@ -1,6 +1,7 @@
 ﻿using Backend.DTO;
 using Backend.Services.Interfaces;
 using Entidades.DTOs;
+using Entidades.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,20 +22,17 @@ namespace Backend.Controllers
         [HttpPost("crear")]
         public IActionResult CrearAhorro([FromBody] AhorroDTO ahorro)
         {
-            if (ahorro == null || ahorro.UsuarioID <= 0 || string.IsNullOrWhiteSpace(ahorro.Nombre) || ahorro.Monto_Objetivo <= 0)
+            if (ahorro == null || string.IsNullOrWhiteSpace(ahorro.Nombre) || ahorro.Monto_Objetivo <= 0)
                 return BadRequest("Datos inválidos para la meta de ahorro.");
 
             var result = _ahorroService.AddAhorro(ahorro);
             return Ok(result);
         }
 
-        [HttpPost("obtenerAhorros")]
-        public IActionResult ObtenerAhorros([FromBody] UsuarioDTO usuario)
+        [HttpGet("obtenerAhorros")]
+        public IActionResult ObtenerAhorros()
         {
-            if (usuario == null || usuario.UsuarioId <= 0)
-                return BadRequest("ID de usuario inválido.");
-
-            var result = _ahorroService.GetAhorros(usuario.UsuarioId);
+            var result = _ahorroService.GetAhorros();
             return Ok(result);
         }
 
@@ -82,12 +80,9 @@ namespace Backend.Controllers
         }
 
         [HttpGet("usuario/{usuarioId}/notificaciones")]
-        public IActionResult GetNotificaciones(int usuarioId)
+        public IActionResult GetNotificaciones()
         {
-            if (usuarioId <= 0)
-                return BadRequest("ID de usuario inválido.");
-
-            var notis = _ahorroService.GetNotificaciones(usuarioId);
+            var notis = _ahorroService.GetNotificaciones();
             return Ok(notis);
         }
     }
