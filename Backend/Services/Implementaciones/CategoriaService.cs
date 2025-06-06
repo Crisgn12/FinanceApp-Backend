@@ -3,16 +3,19 @@ using DAL.Implementaciones;
 using DAL.Interfaces;
 using Entidades.DTOs;
 using Entidades.Entities;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Backend.Services.Implementaciones
 {
     public class CategoriaService: ICategoriaService
     {
         IUnidadDeTrabajo _unidadDeTrabajo;
-
-        public CategoriaService(IUnidadDeTrabajo unidadDeTrabajo)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public CategoriaService(IUnidadDeTrabajo unidadDeTrabajo, IHttpContextAccessor httpContextAccessor)
         {
             _unidadDeTrabajo = unidadDeTrabajo;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         private CategoriaDTO Convertir(Categoria categoria)
@@ -27,8 +30,10 @@ namespace Backend.Services.Implementaciones
             };
         }
 
-        public async Task<IEnumerable<CategoriaDTO>> ObtenerCategoriasPorUsuarioID(string usuarioID)
+        public async Task<IEnumerable<CategoriaDTO>> ObtenerCategoriasPorUsuarioID()
         {
+            var usuarioID = GetCurrentUserId();
+
             var categorias = await _unidadDeTrabajo.CategoriaDAL.ObtenerCategoriasPorUsuario(usuarioID);
             var listaCategorias = new List<CategoriaDTO>();
             foreach (var categoria in categorias)
@@ -49,6 +54,7 @@ namespace Backend.Services.Implementaciones
                 throw new ArgumentException("El tipo debe ser 'Ingreso' o 'Gasto'.");
             }
 
+            categoriaDTO.UsuarioID = GetCurrentUserId();
             categoriaDTO.EsPredeterminada = false;
             categoriaDTO.CategoriaID = null;
 
@@ -78,6 +84,8 @@ namespace Backend.Services.Implementaciones
 
             try
             {
+                categoriaDTO.UsuarioID = GetCurrentUserId();
+
                 resultado = await _unidadDeTrabajo.CategoriaDAL.ActualizarCategoria(categoriaDTO);
             }
             catch (Exception ex) when (ex.Message.Contains("Ya existe una categoría") || ex.Message.Contains("no existe") || ex.Message.Contains("no tiene permiso"))
@@ -92,12 +100,38 @@ namespace Backend.Services.Implementaciones
         {
             try
             {
+                req.UsuarioID = GetCurrentUserId();
+
                 return await _unidadDeTrabajo.CategoriaDAL.EliminarCategoria(req);
             }
             catch (Exception ex) when (ex.Message.Contains("no existe") || ex.Message.Contains("no tiene permiso") || ex.Message.Contains("transacciones asociadas"))
             {
                 throw new ArgumentException(ex.Message);
             }
+        }
+
+        private string GetCurrentUserId()
+        {
+            var user = _httpContextAccessor.HttpContext?.User;
+
+            if (user == null || !user.Identity.IsAuthenticated)
+            {
+                throw new UnauthorizedAccessException("Usuario no autenticado");
+            }
+
+            // Intenta obtener el ID de múltiples claims estándar
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                      ?? user.FindFirst(JwtRegisteredClaimNames.Sub)?.Value
+                      ?? user.FindFirst("sub")?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                // Log para depuración: muestra todos los claims disponibles
+                var claims = user.Claims.Select(c => $"{c.Type}: {c.Value}");
+                throw new UnauthorizedAccessException("No se pudo obtener el ID del usuario del token");
+            }
+
+            return userId;
         }
     }
 }

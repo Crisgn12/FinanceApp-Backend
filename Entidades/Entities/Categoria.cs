@@ -19,5 +19,5 @@ public partial class Categoria
 
     public virtual ICollection<Transaccion> Transacciones { get; set; } = new List<Transaccion>();
 
-    public virtual Usuario Usuario { get; set; } = null!;
+    //public virtual Usuario Usuario { get; set; } = null!;
 }

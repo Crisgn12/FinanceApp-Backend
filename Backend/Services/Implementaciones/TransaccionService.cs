@@ -3,16 +3,20 @@ using DAL.Implementaciones;
 using DAL.Interfaces;
 using Entidades.DTOs;
 using Entidades.Entities;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Backend.Services.Implementaciones
 {
     public class TransaccionService : ITransaccionService
     {
         IUnidadDeTrabajo _unidadDeTrabajo;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public TransaccionService(IUnidadDeTrabajo unidadDeTrabajo)
+        public TransaccionService(IUnidadDeTrabajo unidadDeTrabajo, IHttpContextAccessor httpContextAccessor)
         {
             _unidadDeTrabajo = unidadDeTrabajo;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<bool> IngresarTransaccionAsync(TransaccionDTO transaccionDTO)
@@ -37,6 +41,7 @@ namespace Backend.Services.Implementaciones
                 throw new ArgumentException("El título es obligatorio.");
             }
 
+            transaccionDTO.UsuarioId = GetCurrentUserId();
             transaccionDTO.TransaccionId = null;
 
             try
@@ -55,6 +60,8 @@ namespace Backend.Services.Implementaciones
         {
             try
             {
+                req.UsuarioId = GetCurrentUserId();
+
                 return await _unidadDeTrabajo.TransaccionDAL.ObtenerTransaccionesPorUsuario(req);
             }
             catch (Exception ex) when (ex.Message.Contains("no existe"))
@@ -75,10 +82,8 @@ namespace Backend.Services.Implementaciones
                 {
                     throw new ArgumentException("El ID de la transacción es obligatorio.");
                 }
-                if (req.UsuarioId <= 0)
-                {
-                    throw new ArgumentException("El ID del usuario es obligatorio.");
-                }
+
+                req.UsuarioId = GetCurrentUserId();
 
                 return await _unidadDeTrabajo.TransaccionDAL.ObtenerDetalleTransaccion(req);
             }
@@ -119,6 +124,8 @@ namespace Backend.Services.Implementaciones
 
             try
             {
+                transaccionDTO.UsuarioId = GetCurrentUserId();
+
                 resultado = await _unidadDeTrabajo.TransaccionDAL.ActualizarTransaccion(transaccionDTO);
 
                 _unidadDeTrabajo.GuardarCambios();
@@ -141,10 +148,8 @@ namespace Backend.Services.Implementaciones
                 {
                     throw new ArgumentException("El ID de la transacción es obligatorio.");
                 }
-                if (req.UsuarioID <= 0)
-                {
-                    throw new ArgumentException("El ID del usuario es obligatorio.");
-                }
+
+                req.UsuarioID = GetCurrentUserId();
 
                 resultado = await _unidadDeTrabajo.TransaccionDAL.EliminarTransaccion(req);
 
@@ -160,6 +165,30 @@ namespace Backend.Services.Implementaciones
             {
                 throw new Exception($"Error al eliminar la transacción: {ex.Message}");
             }
+        }
+
+        private string GetCurrentUserId()
+        {
+            var user = _httpContextAccessor.HttpContext?.User;
+
+            if (user == null || !user.Identity.IsAuthenticated)
+            {
+                throw new UnauthorizedAccessException("Usuario no autenticado");
+            }
+
+            // Intenta obtener el ID de múltiples claims estándar
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                      ?? user.FindFirst(JwtRegisteredClaimNames.Sub)?.Value
+                      ?? user.FindFirst("sub")?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                // Log para depuración: muestra todos los claims disponibles
+                var claims = user.Claims.Select(c => $"{c.Type}: {c.Value}");
+                throw new UnauthorizedAccessException("No se pudo obtener el ID del usuario del token");
+            }
+
+            return userId;
         }
     }
 }

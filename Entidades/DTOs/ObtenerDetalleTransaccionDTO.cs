@@ -9,6 +9,6 @@ namespace Entidades.DTOs
     public class ObtenerDetalleTransaccionDTO
     {
         public int TransaccionId { get; set; }
-        public int UsuarioId { get; set; }
+        public string? UsuarioId { get; set; }
     }
 }
