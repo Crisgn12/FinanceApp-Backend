@@ -54,7 +54,7 @@ namespace Backend.Controllers
 
         /* ----------- GET: listar próximos ----------- */
         [HttpGet("proximos/usuario")]
-        public async Task<IActionResult> ListarProximos(int usuarioId, [FromQuery] int dias = 3)
+        public async Task<IActionResult> ListarProximos([FromQuery] int dias = 3)
             => Ok(await _service.ListarProximosAsync(new FiltroPagosProximosDTO
             {
                 DiasAnticipacion = dias

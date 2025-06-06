@@ -15,7 +15,7 @@ public class PagoProgramadoDTO
     public decimal Monto { get; set; }
     public DateOnly ProximoVencimiento { get; set; }
     public string Frecuencia { get; set; } = null!;
-    public DateTime? FechaInicio { get; set; }
-    public DateTime? FechaFin { get; set; }
+    public DateOnly? FechaInicio { get; set; }
+    public DateOnly? FechaFin { get; set; }
     public bool Activo { get; set; }
 }
