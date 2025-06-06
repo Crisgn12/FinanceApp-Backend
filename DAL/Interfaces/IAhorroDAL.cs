@@ -8,7 +8,7 @@ namespace DAL.Interfaces
         Ahorro UpdateAhorro(Ahorro ahorro);
         void DeleteAhorro(int ahorroId);
         Ahorro GetAhorroById(int ahorroId);
-        List<Ahorro> GetAhorros(int usuarioId);
+        List<Ahorro> GetAhorros(string usuarioId);
         void ActualizarMontoActual(int ahorroId);
     }
 }

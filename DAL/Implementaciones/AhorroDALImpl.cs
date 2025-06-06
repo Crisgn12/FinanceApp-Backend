@@ -76,7 +76,7 @@ namespace DAL.Implementaciones
             return _context.Ahorros.Find(ahorroId);
         }
 
-        public List<Ahorro> GetAhorros(int usuarioId)
+        public List<Ahorro> GetAhorros(string usuarioId)
         {
             return _context.Ahorros.Where(a => a.UsuarioId == usuarioId).ToList();
         }

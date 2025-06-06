@@ -2,6 +2,10 @@
 using Backend.Services.Interfaces;
 using DAL.Interfaces;
 using Entidades.Entities;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using System.IdentityModel.Tokens.Jwt;
+using Humanizer;
 
 namespace Backend.Services.Implementaciones
 {
@@ -9,11 +13,13 @@ namespace Backend.Services.Implementaciones
     {
         ILogger<AhorroService> _logger;
         IUnidadDeTrabajo _unidadDeTrabajo;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AhorroService(IUnidadDeTrabajo unidad, ILogger<AhorroService> logger)
+        public AhorroService(IUnidadDeTrabajo unidad, ILogger<AhorroService> logger, IHttpContextAccessor httpContextAccessor)
         {
             _unidadDeTrabajo = unidad;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         private AhorroDTO Convertir(Ahorro ahorro)
@@ -52,6 +58,9 @@ namespace Backend.Services.Implementaciones
             {
                 _logger.LogError("Ingresa a AddAhorro");
 
+                var usuarioId = GetCurrentUserId();           
+                ahorro.UsuarioID = usuarioId;
+
                 var entity = _unidadDeTrabajo.AhorroDALImpl.AddAhorro(Convertir(ahorro));
                 _unidadDeTrabajo.GuardarCambios();
                 return Convertir(entity);
@@ -68,6 +77,9 @@ namespace Backend.Services.Implementaciones
             try
             {
                 _logger.LogError("Ingresa a UpdateAhorro");
+
+                var usuarioId = GetCurrentUserId();
+                dto.UsuarioID = usuarioId;
 
                 if (dto.AhorroID == null || dto.AhorroID <= 0)
                     throw new ArgumentException("ID de ahorro inválido.");
@@ -114,6 +126,8 @@ namespace Backend.Services.Implementaciones
             {
                 _logger.LogError("Ingresa a DeleteAhorro");
 
+                var usuarioId = GetCurrentUserId();
+
                 var entidadEnBd = _unidadDeTrabajo.AhorroDALImpl.FindById(id);
                 if (entidadEnBd == null)
                 {
@@ -154,11 +168,14 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        public List<AhorroDTO> GetAhorros(int usuarioId)
+        public List<AhorroDTO> GetAhorros()
         {
             try
             {
                 _logger.LogError("Ingresa a GetAhorrosByUsuarioId");
+
+
+                var usuarioId = GetCurrentUserId();
 
                 var ahorros = _unidadDeTrabajo.AhorroDALImpl.GetAhorros(usuarioId);
                 var dtoList = ahorros.Select(a => Convertir(a)).ToList();
@@ -221,14 +238,41 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        public List<AhorroDTO> GetNotificaciones(int usuarioId)
+        public List<AhorroDTO> GetNotificaciones()
         {
+            var usuarioId = GetCurrentUserId();
             var todas = _unidadDeTrabajo.AhorroDALImpl.GetAhorros(usuarioId);
             var notis = todas
                 .Where(a => a.UltimaNotificacion.HasValue)
                 .Select(a => Convertir(a))
                 .ToList();
             return notis;
+        }
+
+        private string GetCurrentUserId()
+        {
+            var user = _httpContextAccessor.HttpContext?.User;
+
+            if (user == null || !user.Identity.IsAuthenticated)
+            {
+                _logger.LogError("Usuario no autenticado");
+                throw new UnauthorizedAccessException("Usuario no autenticado");
+            }
+
+            // Intenta obtener el ID de múltiples claims estándar
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                      ?? user.FindFirst(JwtRegisteredClaimNames.Sub)?.Value
+                      ?? user.FindFirst("sub")?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                // Log para depuración: muestra todos los claims disponibles
+                var claims = user.Claims.Select(c => $"{c.Type}: {c.Value}");
+                _logger.LogError($"No se encontró el ID de usuario en los claims. Claims disponibles: {string.Join(", ", claims)}");
+                throw new UnauthorizedAccessException("No se pudo obtener el ID del usuario del token");
+            }
+
+            return userId;
         }
     }
 }
