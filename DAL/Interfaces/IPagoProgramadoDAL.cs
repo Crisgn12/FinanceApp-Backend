@@ -8,7 +8,7 @@ namespace DAL.Interfaces
     {
         Task<bool> CrearPagoProgramadoAsync(CrearPagoProgramadoDTO dto);
         Task<bool> ActualizarPagoProgramadoAsync(PagoProgramadoDTO dto);
-        Task<bool> EliminarPagoProgramadoAsync(int pagoId, int usuarioId);
+        Task<bool> EliminarPagoProgramadoAsync(int pagoId, string usuarioId);
         Task<List<PagoProgramadoDTO>> ObtenerPagosProgramadosAsync(FiltroPagosProgramadosDTO filtro);
         Task<List<PagoProgramadoDTO>> ObtenerPagosProximosAsync(FiltroPagosProximosDTO filtro);
     }

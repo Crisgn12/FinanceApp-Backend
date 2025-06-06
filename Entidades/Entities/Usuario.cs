@@ -25,9 +25,9 @@ public partial class Usuario
 
     public virtual ICollection<Informe> Informes { get; set; } = new List<Informe>();
 
-    public virtual ICollection<Notificacion> Notificaciones { get; set; } = new List<Notificacion>();
+//   public virtual ICollection<Notificacion> Notificaciones { get; set; } = new List<Notificacion>();
 
-    public virtual ICollection<Pago> Pagos { get; set; } = new List<Pago>();
+  //  public virtual ICollection<Pago> Pagos { get; set; } = new List<Pago>();
 
     public virtual ICollection<Presupuesto> Presupuestos { get; set; } = new List<Presupuesto>();
 

@@ -7,7 +7,7 @@ public partial class Pago
 {
     public int PagoId { get; set; }
 
-    public int UsuarioId { get; set; }
+    public string UsuarioId { get; set; }
 
     public string Titulo { get; set; } = null!;
 
@@ -21,7 +21,7 @@ public partial class Pago
 
     public DateTime? CreatedAt { get; set; }
 
-    public virtual Usuario Usuario { get; set; } = null!;
+   // public virtual Usuario Usuario { get; set; } = null!;
     public bool EsProgramado { get; set; }
     public string? Frecuencia { get; set; }
     public DateOnly? FechaInicio { get; set; }

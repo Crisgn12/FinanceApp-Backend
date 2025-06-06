@@ -95,9 +95,6 @@ namespace Backend.Services.Implementaciones
                 if (dto.Monto_Objetivo.HasValue)
                     entity.MontoObjetivo = dto.Monto_Objetivo.Value;
 
-                if (dto.Monto_Actual.HasValue)
-                    entity.MontoActual = dto.Monto_Actual.Value;
-
                 if (dto.Completado.HasValue)
                     entity.Completado = dto.Completado.Value;
 
@@ -111,7 +108,11 @@ namespace Backend.Services.Implementaciones
                 _unidadDeTrabajo.AhorroDALImpl.UpdateAhorro(entity);
                 _unidadDeTrabajo.GuardarCambios();
 
-                return Convertir(entity);
+                _unidadDeTrabajo.AhorroDALImpl.ActualizarMontoActual(entity.AhorroId);
+
+                var entidadRecargada = _unidadDeTrabajo.AhorroDALImpl.FindById(entity.AhorroId);
+
+                return Convertir(entidadRecargada);
             }
             catch (Exception ex)
             {
@@ -174,12 +175,21 @@ namespace Backend.Services.Implementaciones
             {
                 _logger.LogError("Ingresa a GetAhorrosByUsuarioId");
 
-
                 var usuarioId = GetCurrentUserId();
+                var ahorrosEnt = _unidadDeTrabajo.AhorroDALImpl.GetAhorros(usuarioId);
 
-                var ahorros = _unidadDeTrabajo.AhorroDALImpl.GetAhorros(usuarioId);
-                var dtoList = ahorros.Select(a => Convertir(a)).ToList();
-                return dtoList;
+                //  !!! Recalcular monto actual para cada ahorro:
+                foreach (var a in ahorrosEnt)
+                {
+                    _unidadDeTrabajo.AhorroDALImpl.ActualizarMontoActual(a.AhorroId);
+                }
+
+                // Ahora recargamos cada uno para que traiga el monto_Actual actualizado
+                var ahorrosRefrescados = ahorrosEnt
+                    .Select(a => _unidadDeTrabajo.AhorroDALImpl.FindById(a.AhorroId))
+                    .ToList();
+
+                return ahorrosRefrescados.Select(a => Convertir(a)).ToList();
             }
             catch (Exception ex)
             {

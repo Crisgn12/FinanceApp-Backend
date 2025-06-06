@@ -32,21 +32,19 @@ namespace Backend.Controllers
         }
 
         /* ----------- DELETE: eliminar ----------- */
-        [HttpDelete("{id:int}/usuario/{usuarioId:int}")]
-        public async Task<IActionResult> Eliminar(int id, int usuarioId)
-            => Ok(await _service.EliminarAsync(id, usuarioId));
+        [HttpDelete("{id:int}/usuario")]
+        public async Task<IActionResult> Eliminar(int id)
+            => Ok(await _service.EliminarAsync(id));
 
         /* ----------- GET: listar todos (filtro) ----------- */
-        [HttpGet("usuario/{usuarioId:int}")]
-        public async Task<IActionResult> Listar(
-            int usuarioId,
+        [HttpGet("usuario")]
+        public async Task<IActionResult> Listar(            
             [FromQuery] DateOnly? fechaInicio,
             [FromQuery] DateOnly? fechaFin,
             [FromQuery] bool? soloActivos)
         {
             var filtro = new FiltroPagosProgramadosDTO
             {
-                UsuarioId = usuarioId,
                 FechaInicio = fechaInicio,
                 FechaFin = fechaFin,
                 SoloActivos = soloActivos
@@ -55,11 +53,10 @@ namespace Backend.Controllers
         }
 
         /* ----------- GET: listar próximos ----------- */
-        [HttpGet("proximos/usuario/{usuarioId:int}")]
+        [HttpGet("proximos/usuario")]
         public async Task<IActionResult> ListarProximos(int usuarioId, [FromQuery] int dias = 3)
             => Ok(await _service.ListarProximosAsync(new FiltroPagosProximosDTO
             {
-                UsuarioId = usuarioId,
                 DiasAnticipacion = dias
             }));
     }

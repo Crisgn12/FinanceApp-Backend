@@ -9,7 +9,7 @@ namespace Entidades.DTOs;
 /// Filtro para obtener los pagos próximos a vencer.
 public class FiltroPagosProximosDTO
 {
-    public int UsuarioId { get; set; }
+    public string? UsuarioId { get; set; }
     /// Días de anticipación (por defecto 3).
     public int DiasAnticipacion { get; set; } = 3;
 }

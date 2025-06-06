@@ -158,10 +158,10 @@ public partial class FinanceAppContext : DbContext
             entity.Property(e => e.Mensaje).HasColumnType("text");
             entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
 
-            entity.HasOne(d => d.Usuario).WithMany(p => p.Notificaciones)
-                .HasForeignKey(d => d.UsuarioId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Notificacion_Usuario");
+            //entity.HasOne(d => d.Usuario).WithMany(p => p.Notificaciones)
+            //    .HasForeignKey(d => d.UsuarioId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_Notificacion_Usuario");
         });
 
         modelBuilder.Entity<Pago>(entity =>
@@ -220,10 +220,10 @@ public partial class FinanceAppContext : DbContext
                   .HasColumnType("bit")
                   .HasDefaultValueSql("((1))");
 
-            entity.HasOne(d => d.Usuario).WithMany(p => p.Pagos)
-                  .HasForeignKey(d => d.UsuarioId)
-                  .OnDelete(DeleteBehavior.ClientSetNull)
-                  .HasConstraintName("FK_Pago_Usuario");
+            //entity.HasOne(d => d.Usuario).WithMany(p => p.Pagos)
+            //      .HasForeignKey(d => d.UsuarioId)
+            //      .OnDelete(DeleteBehavior.ClientSetNull)
+            //      .HasConstraintName("FK_Pago_Usuario");
         });
 
 
