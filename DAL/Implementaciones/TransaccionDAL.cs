@@ -43,7 +43,7 @@ namespace DAL.Implementaciones
             }
             catch (SqlException ex) when (ex.Number == 50000)
             {
-                throw new Exception(ex.Message); 
+                throw new Exception(ex.Message);
             }
             catch (Exception ex)
             {
@@ -73,7 +73,7 @@ namespace DAL.Implementaciones
             }
             catch (SqlException ex) when (ex.Number == 50000)
             {
-                throw new Exception(ex.Message); 
+                throw new Exception(ex.Message);
             }
             catch (Exception ex)
             {
@@ -170,11 +170,59 @@ namespace DAL.Implementaciones
             }
             catch (SqlException ex) when (ex.Number == 50000)
             {
-                throw new Exception(ex.Message); 
+                throw new Exception(ex.Message);
             }
             catch (Exception ex)
             {
                 throw new Exception($"Error al eliminar la transacción: {ex.Message}");
+            }
+        }
+
+        public Task<List<TotalxDiaDTO>> TotalGastosUltimos6diasPorUsuario(string usuarioId)
+        {
+            try
+            {
+                var parameters = new[]
+                {
+                    new SqlParameter("@UsuarioID", usuarioId)
+                };
+                var totalGastos = _context.Database
+                    .SqlQueryRaw<TotalxDiaDTO>(
+                        "EXEC SP_OBTENER_GASTOS_ULTIMOS_6_DIAS_POR_USUARIO @UsuarioID",
+                        parameters);
+                return totalGastos.ToListAsync();
+            }
+            catch (SqlException ex) when (ex.Number == 50000)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el total de gastos: {ex.Message}");
+            }
+        }
+
+        public Task<List<GraficoCategoriasDTO>> TotalGastosPorCategoria(string usuarioId)
+        {
+            try
+            {
+                var parameters = new[]
+                {
+                    new SqlParameter("@UsuarioID", usuarioId)
+                };
+                var totalGastosPorCategoria = _context.Database
+                    .SqlQueryRaw<GraficoCategoriasDTO>(
+                        "EXEC SP_OBTENER_GASTOS_POR_CATEGORIA @UsuarioID",
+                        parameters);
+                return totalGastosPorCategoria.ToListAsync();
+            }
+            catch (SqlException ex) when (ex.Number == 50000)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el total de gastos por categoría: {ex.Message}");
             }
         }
     }
