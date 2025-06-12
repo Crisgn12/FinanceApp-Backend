@@ -167,6 +167,33 @@ namespace Backend.Services.Implementaciones
             }
         }
 
+        public Task<List<TotalxDiaDTO>> TotalGastosUltimos6diasPorUsuarioAsync()
+        {
+            try
+            {
+                var usuarioId = GetCurrentUserId();
+                return _unidadDeTrabajo.TransaccionDAL.TotalGastosUltimos6diasPorUsuario(usuarioId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el total de gastos de los últimos 6 días: {ex.Message}");
+            }
+        }
+
+        public Task<List<GraficoCategoriasDTO>> TotalGastosPorCategoriaAsync()
+        {
+            try
+            {
+                var usuarioId = GetCurrentUserId();
+                return _unidadDeTrabajo.TransaccionDAL.TotalGastosPorCategoria(usuarioId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el total de gastos por categoría: {ex.Message}");
+            }
+        }
+
+        #region Auxiliares
         private string GetCurrentUserId()
         {
             var user = _httpContextAccessor.HttpContext?.User;
@@ -190,5 +217,6 @@ namespace Backend.Services.Implementaciones
 
             return userId;
         }
+        #endregion
     }
 }

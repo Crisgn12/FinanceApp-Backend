@@ -53,5 +53,19 @@ namespace Backend.Controllers
         {
             return _transaccionService.EliminarTransaccionAsync(req);
         }
+
+        [HttpGet]
+        [Route("GastosUltimos6dias")]
+        public Task<List<TotalxDiaDTO>> TotalGastosUltimos6diasPorUsuario()
+        {
+            return _transaccionService.TotalGastosUltimos6diasPorUsuarioAsync();
+        }
+
+        [HttpGet]
+        [Route("GastosPorCategoria")]
+        public Task<List<GraficoCategoriasDTO>> TotalGastosPorCategoria()
+        {
+            return _transaccionService.TotalGastosPorCategoriaAsync();
+        }
     }
 }
