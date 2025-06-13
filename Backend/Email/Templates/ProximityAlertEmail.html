@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bg-gray-900 {
+            background-color: #1a202c;
+        }
+
+        .text-gray-900 {
+            color: #1a202c;
+        }
+
+        .hover\:bg-gray-100:hover {
+            background-color: #f7fafc;
+        }
+
+        .focus\:ring-2:focus {
+            box-shadow: 0 0 0 2px #000;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl mx-auto p-6">
+        <div class="flex justify-between items-center mb-6 border-b border-gray-200 pb-4">
+            <h2 class="text-2xl font-bold text-gray-900">Alerta de Pago</h2>
+            <a href="#" class="text-gray-500 hover:text-gray-700 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </a>
+        </div>
+        <p class="text-lg text-gray-700 mb-4">Estimado/a, el pago <strong>{titulo}</strong> por <strong>{monto}€</strong> vence mañana <strong>{fechaVencimiento}</strong>.</p>
+        <p class="text-gray-600 mb-6">Por favor, realice el pago a tiempo para evitar inconvenientes. Descripción: {descripcion}</p>
+        <div class="border-t border-gray-200 pt-4">
+            <a href="#" class="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200">Ver Detalles</a>
+        </div>
+    </div>
+</body>
+</html>
