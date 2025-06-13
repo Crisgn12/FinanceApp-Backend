@@ -15,5 +15,7 @@ namespace DAL.Interfaces
         Task<TransaccionDTO> ObtenerDetalleTransaccion(ObtenerDetalleTransaccionDTO req);
         Task<bool> ActualizarTransaccion(TransaccionDTO transaccionDTO);
         Task<bool> EliminarTransaccion(EliminarTransaccionDTO req);
+        Task<List<TotalxDiaDTO>> TotalGastosUltimos6diasPorUsuario(string usuarioId);
+        Task<List<GraficoCategoriasDTO>> TotalGastosPorCategoria(string usuarioId);
     }
 }
