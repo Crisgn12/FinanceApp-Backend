@@ -20,7 +20,6 @@ namespace Backend.Services.Implementaciones
             _repo = repo;
             _httpContextAccessor = httpContextAccessor;
         }
-
         public Task<bool> CrearAsync(CrearPagoProgramadoDTO dto)
         {
             if (dto.Monto <= 0)
@@ -34,33 +33,32 @@ namespace Backend.Services.Implementaciones
 
             return _repo.CrearPagoProgramadoAsync(dto);
         }
-
         public Task<bool> ActualizarAsync(PagoProgramadoDTO dto)
         {
             var userId = GetCurrentUserId();
             dto.UsuarioId = userId;
             return _repo.ActualizarPagoProgramadoAsync(dto);
         }
-
-        public Task<bool> EliminarAsync(int pagoId)
+        public async Task<bool> CambiarEstadoAsync(CambioEstadoDTO dto)
+        {
+            return await _repo.CambiarEstadoPagoProgramadoAsync(dto);
+        }
+        public Task<bool> EliminarAsync(PagoProgramadoDTO dto)
         {
             var usuarioId = GetCurrentUserId();
-            return _repo.EliminarPagoProgramadoAsync(pagoId, usuarioId);
+            return _repo.EliminarPagoProgramadoAsync(dto);
         }
-
         public Task<List<PagoProgramadoDTO>> ListarAsync(FiltroPagosProgramadosDTO filtro)
         {
             var userId = GetCurrentUserId();
             filtro.UsuarioId = userId;
             return _repo.ObtenerPagosProgramadosAsync(filtro);
         }
-
         public Task<List<PagoProgramadoDTO>> ListarProximosAsync(FiltroPagosProximosDTO filtro) {
             var userId = GetCurrentUserId();
             filtro.UsuarioId = userId;
             return _repo.ObtenerPagosProximosAsync(filtro);
         }
-
         private string GetCurrentUserId()
         {
             var user = _httpContextAccessor.HttpContext?.User;

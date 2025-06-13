@@ -17,7 +17,6 @@ namespace DAL.Implementaciones
         public ICategoriaDAL CategoriaDAL { get; private set; }
         public ITransaccionDAL TransaccionDAL { get; private set; }
         public IPagoProgramadoDAL PagoProgramadoDAL { get; private set; }
-
         public IAhorroDAL AhorroDALImpl { get; private set; }
         public IAporteMetaAhorroDAL AporteMetaAhorroDALImpl { get; private set; }
 
@@ -30,8 +29,7 @@ namespace DAL.Implementaciones
             this.AporteMetaAhorroDALImpl = aporteMetaAhorroDALImpl;
             this.CategoriaDAL = categoriaDAL;
             this.TransaccionDAL = transaccionDAL;
-            PagoProgramadoDAL = pagoProgramadoDAL;
-
+            this.PagoProgramadoDAL = pagoProgramadoDAL;
         }
 
         public bool GuardarCambios()

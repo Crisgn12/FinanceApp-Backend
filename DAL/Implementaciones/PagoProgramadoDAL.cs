@@ -1,6 +1,7 @@
 ﻿using DAL.Interfaces;
 using Entidades.DTOs;
 using Entidades.Entities;
+using Humanizer;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,7 +19,6 @@ namespace DAL.Implementaciones
         {
             _context = context;
         }
-
         /* --------------- Crear --------------- */
         public async Task<bool> CrearPagoProgramadoAsync(CrearPagoProgramadoDTO dto)
         {
@@ -39,47 +39,106 @@ namespace DAL.Implementaciones
             // (-1 cuando SET NOCOUNT ON) o (>0 filas afectadas) → éxito
             return filas == -1 || filas > 0;
         }
-
         /* --------------- Actualizar --------------- */
         public async Task<bool> ActualizarPagoProgramadoAsync(PagoProgramadoDTO dto)
         {
-            var p = new[]
+            var parametros = new List<SqlParameter>
             {
-                new SqlParameter("@PagoID",     dto.PagoId),
-                new SqlParameter("@UsuarioID",  dto.UsuarioId),
-                new SqlParameter("@Titulo",     dto.Titulo),
-                new SqlParameter("@Descripcion",(object?)dto.Descripcion ?? DBNull.Value),
-                new SqlParameter("@Monto",      dto.Monto),
-                new SqlParameter("@Frecuencia", dto.Frecuencia),
-                new SqlParameter("@FechaInicio", dto.FechaInicio.HasValue ? (object)dto.FechaInicio.Value : DBNull.Value),
-                new SqlParameter("@FechaFin",    dto.FechaFin.HasValue    ? (object)dto.FechaFin.Value    : DBNull.Value),
-                new SqlParameter("@Activo",      dto.Activo)
+                new SqlParameter("@PagoID", dto.PagoId),
+                new SqlParameter("@UsuarioID", dto.UsuarioId)
             };
 
-            var sql = @"
+            var campos = new List<string>();
+
+            // Solo agregar parámetros que tienen valor
+            if (!string.IsNullOrEmpty(dto.Titulo))
+            {
+                parametros.Add(new SqlParameter("@Titulo", dto.Titulo));
+                campos.Add("@Titulo = @Titulo");
+            }
+
+            if (!string.IsNullOrEmpty(dto.Descripcion))
+            {
+                parametros.Add(new SqlParameter("@Descripcion", dto.Descripcion));
+                campos.Add("@Descripcion = @Descripcion");
+            }
+
+            if (dto.Monto > 0)
+            {
+                parametros.Add(new SqlParameter("@Monto", dto.Monto));
+                campos.Add("@Monto = @Monto");
+            }
+
+            if (!string.IsNullOrEmpty(dto.Frecuencia))
+            {
+                parametros.Add(new SqlParameter("@Frecuencia", dto.Frecuencia));
+                campos.Add("@Frecuencia = @Frecuencia");
+            }
+
+            if (dto.FechaInicio.HasValue)
+            {
+                parametros.Add(new SqlParameter("@FechaInicio", dto.FechaInicio.Value));
+                campos.Add("@FechaInicio = @FechaInicio");
+            }
+
+            if (dto.FechaFin.HasValue)
+            {
+                parametros.Add(new SqlParameter("@FechaFin", dto.FechaFin.Value));
+                campos.Add("@FechaFin = @FechaFin");
+            }
+
+            if (dto.Activo.HasValue)
+            {
+                parametros.Add(new SqlParameter("@Activo", dto.Activo.Value));
+                campos.Add("@Activo = @Activo");
+            }
+
+            if (campos.Count == 0)
+            {
+                return false; // No hay nada que actualizar
+            }
+
+            var sql = $@"
                 EXEC dbo.SP_ACTUALIZAR_PAGO_PROGRAMADO 
-                    @PagoID       = @PagoID,
-                    @UsuarioID    = @UsuarioID,
-                    @Titulo       = @Titulo,
-                    @Descripcion  = @Descripcion,
-                    @Monto        = @Monto,
-                    @Frecuencia   = @Frecuencia,
-                    @FechaInicio  = @FechaInicio,
-                    @FechaFin     = @FechaFin,
-                    @Activo       = @Activo;
+                    @PagoID = @PagoID,
+                    @UsuarioID = @UsuarioID,
+                    {string.Join(",\n                    ", campos)};
             ";
 
-            int filas = await _context.Database.ExecuteSqlRawAsync(sql, p);
+            int filas = await _context.Database.ExecuteSqlRawAsync(sql, parametros.ToArray());
             return filas > 0;
         }
-
-        /* --------------- Eliminar --------------- */
-        public async Task<bool> EliminarPagoProgramadoAsync(int pagoId, string usuarioId)
+        /* --------------- Cambiar Estado (NUEVO) --------------- */
+        public async Task<bool> CambiarEstadoPagoProgramadoAsync(CambioEstadoDTO dto)
         {
             var p = new[]
             {
-                new SqlParameter("@PagoID",    pagoId),
-                new SqlParameter("@UsuarioID", usuarioId)
+        new SqlParameter("@PagoID", dto.PagoId),
+        new SqlParameter("@UsuarioID", dto.UsuarioId),
+        new SqlParameter("@Estado", dto.Estado ?? (object)DBNull.Value)
+    };
+
+            var sql = @"
+        EXEC dbo.SP_ACTUALIZAR_PAGO_PROGRAMADO 
+            @PagoID = @PagoID,
+            @UsuarioID = @UsuarioID,
+            @Estado = @Estado;
+    ";
+
+            var result = await _context.FilasAfectadasResults
+                .FromSqlRaw(sql, p)
+                .ToListAsync();
+
+            return result.FirstOrDefault()?.FilasAfectadas > 0;
+        }
+
+        /* --------------- Eliminar --------------- */
+        public async Task<bool> EliminarPagoProgramadoAsync(PagoProgramadoDTO dto)
+        {
+            var p = new[]
+            {
+                new SqlParameter("@PagoID", dto.PagoId),
+                new SqlParameter("@UsuarioID", dto.UsuarioId)
             };
 
             int filas = await _context.Database.ExecuteSqlRawAsync(
@@ -87,24 +146,20 @@ namespace DAL.Implementaciones
 
             return filas == -1 || filas > 0;
         }
-
         /* --------------- Listar (filtro general) --------------- */
         public async Task<List<PagoProgramadoDTO>> ObtenerPagosProgramadosAsync(FiltroPagosProgramadosDTO f)
         {
             var p = new[]
             {
-                new SqlParameter("@UsuarioID",   f.UsuarioId),
-                new SqlParameter("@FechaInicio", (object?)f.FechaInicio?.ToDateTime(TimeOnly.MinValue) ?? DBNull.Value),
-                new SqlParameter("@FechaFin",    (object?)f.FechaFin?.ToDateTime(TimeOnly.MinValue) ?? DBNull.Value),
-                new SqlParameter("@SoloActivos", (object?)f.SoloActivos ?? DBNull.Value)
-            };
-
-            // Materializar primero con ToListAsync() y luego proyectar
+        new SqlParameter("@UsuarioID", f.UsuarioId),
+        new SqlParameter("@FechaInicio", f.FechaInicio.HasValue ? f.FechaInicio.Value.ToDateTime(TimeOnly.MinValue) : (object)DBNull.Value),
+        new SqlParameter("@FechaFin", f.FechaFin.HasValue ? f.FechaFin.Value.ToDateTime(TimeOnly.MinValue) : (object)DBNull.Value),
+        new SqlParameter("@SoloActivos", f.SoloActivos.HasValue ? f.SoloActivos.Value : (object)DBNull.Value)
+    };
             var rows = await _context.Pagos
-                .FromSqlRaw("EXEC dbo.SP_OBTENER_PAGOS_PROGRAMADOS @UsuarioID,@FechaInicio,@FechaFin,@SoloActivos", p)
+                .FromSqlRaw("EXEC dbo.SP_OBTENER_PAGOS_PROGRAMADOS @UsuarioID, @FechaInicio, @FechaFin, @SoloActivos", p)
                 .AsNoTracking()
                 .ToListAsync();
-
             return rows.Select(pago => new PagoProgramadoDTO
             {
                 PagoId = pago.PagoId,
@@ -112,13 +167,16 @@ namespace DAL.Implementaciones
                 Titulo = pago.Titulo,
                 Descripcion = pago.Descripcion,
                 Monto = pago.Monto,
-                ProximoVencimiento = pago.ProximoVencimiento!.Value,
-                Frecuencia = pago.Frecuencia!,
+                FechaVencimiento = pago.FechaVencimiento,
+                Estado = pago.Estado,
+                EsProgramado = pago.EsProgramado,
+                Frecuencia = pago.Frecuencia,
+                FechaInicio = pago.FechaInicio,
+                FechaFin = pago.FechaFin,
+                ProximoVencimiento = pago.ProximoVencimiento,
                 Activo = pago.Activo
-            })
-            .ToList();
+            }).ToList();
         }
-
         /* --------------- Listar próximos --------------- */
         public async Task<List<PagoProgramadoDTO>> ObtenerPagosProximosAsync(FiltroPagosProximosDTO f)
         {

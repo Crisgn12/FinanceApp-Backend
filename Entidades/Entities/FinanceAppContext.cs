@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Entidades.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 
 namespace Entidades.Entities;
 
@@ -17,20 +18,14 @@ public partial class FinanceAppContext : DbContext
     }
     public virtual DbSet<Ahorro> Ahorros { get; set; }
     public virtual DbSet<AporteMetaAhorro> AporteMetaAhorros { get; set; }
-
     public virtual DbSet<Categoria> Categorias { get; set; }
-
     public virtual DbSet<Informe> Informes { get; set; }
-
     public virtual DbSet<Notificacion> Notificaciones { get; set; }
-
     public virtual DbSet<Pago> Pagos { get; set; }
-
     public virtual DbSet<Presupuesto> Presupuestos { get; set; }
-
     public virtual DbSet<Transaccion> Transacciones { get; set; }
-
     public virtual DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<FilasAfectadasResult> FilasAfectadasResults { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -75,7 +70,7 @@ public partial class FinanceAppContext : DbContext
         });
 
         modelBuilder.Ignore<Usuario>();
-
+        modelBuilder.Entity<FilasAfectadasResult>().HasNoKey();
         modelBuilder.Entity<AporteMetaAhorro>(entity =>
         {
             entity.HasKey(e => e.AporteId).HasName("PK__AporteMetaAhorro");
