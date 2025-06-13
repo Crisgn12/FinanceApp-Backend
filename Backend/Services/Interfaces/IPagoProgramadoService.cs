@@ -8,7 +8,8 @@ namespace Backend.Services.Interfaces
     {
         Task<bool> CrearAsync(CrearPagoProgramadoDTO dto);
         Task<bool> ActualizarAsync(PagoProgramadoDTO dto);
-        Task<bool> EliminarAsync(int pagoId);
+        Task<bool> EliminarAsync(PagoProgramadoDTO dto);
+        Task<bool> CambiarEstadoAsync(CambioEstadoDTO dto);
         Task<List<PagoProgramadoDTO>> ListarAsync(FiltroPagosProgramadosDTO filtro);
         Task<List<PagoProgramadoDTO>> ListarProximosAsync(FiltroPagosProximosDTO filtro);
     }

@@ -16,8 +16,6 @@ namespace DAL.Interfaces
         ITransaccionDAL TransaccionDAL { get; }
         IPagoProgramadoDAL PagoProgramadoDAL { get; }
 
-        // Metodos
-
         bool GuardarCambios();
     }
 }
