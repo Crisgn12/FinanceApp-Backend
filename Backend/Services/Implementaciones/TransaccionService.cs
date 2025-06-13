@@ -193,7 +193,47 @@ namespace Backend.Services.Implementaciones
             }
         }
 
+        public Task<decimal> TotalGastosxMesAsync()
+        {
+            try
+            {
+                var usuarioId = GetCurrentUserId();
+                return _unidadDeTrabajo.TransaccionDAL.TotalGastosxMes(usuarioId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el total de gastos por mes: {ex.Message}");
+            }
+        }
+
+        public Task<decimal> TotalIngresosxMesAsync()
+        {
+            try
+            {
+                var usuarioId = GetCurrentUserId();
+                return _unidadDeTrabajo.TransaccionDAL.TotalIngresosxMes(usuarioId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el total de ingresos por mes: {ex.Message}");
+            }
+        }
+
+        public Task<decimal> BalanceMesActualAsync()
+        {
+            try
+            {
+                var usuarioId = GetCurrentUserId();
+                return _unidadDeTrabajo.TransaccionDAL.BalanceMesActual(usuarioId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el balance del mes actual: {ex.Message}");
+            }
+        }
+
         #region Auxiliares
+
         private string GetCurrentUserId()
         {
             var user = _httpContextAccessor.HttpContext?.User;
@@ -217,6 +257,7 @@ namespace Backend.Services.Implementaciones
 
             return userId;
         }
+
         #endregion
     }
 }

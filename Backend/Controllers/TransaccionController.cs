@@ -67,5 +67,26 @@ namespace Backend.Controllers
         {
             return _transaccionService.TotalGastosPorCategoriaAsync();
         }
+
+        [HttpGet]
+        [Route("TotalGastosxMes")]
+        public Task<decimal> TotalGastosxMes()
+        {
+            return _transaccionService.TotalGastosxMesAsync();
+        }
+
+        [HttpGet]
+        [Route("TotalIngresosxMes")]
+        public Task<decimal> TotalIngresosxMes()
+        {
+            return _transaccionService.TotalIngresosxMesAsync();
+        }
+
+        [HttpGet]
+        [Route("BalanceMesActual")]
+        public Task<decimal> BalanceMesActual()
+        {
+            return _transaccionService.BalanceMesActualAsync();
+        }
     }
 }
