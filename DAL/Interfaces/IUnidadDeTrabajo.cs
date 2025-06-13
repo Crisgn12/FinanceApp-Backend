@@ -15,7 +15,7 @@ namespace DAL.Interfaces
         ICategoriaDAL CategoriaDAL { get; }
         ITransaccionDAL TransaccionDAL { get; }
         IPagoProgramadoDAL PagoProgramadoDAL { get; }
-
+        IEventoFinancieroDAL EventoFinancieroDAL { get; }
         // Metodos
 
         bool GuardarCambios();

@@ -17,21 +17,14 @@ public partial class FinanceAppContext : DbContext
     }
     public virtual DbSet<Ahorro> Ahorros { get; set; }
     public virtual DbSet<AporteMetaAhorro> AporteMetaAhorros { get; set; }
-
+    public virtual DbSet<EventoFinanciero> EventosFinancieros { get; set; }
     public virtual DbSet<Categoria> Categorias { get; set; }
-
     public virtual DbSet<Informe> Informes { get; set; }
-
     public virtual DbSet<Notificacion> Notificaciones { get; set; }
-
     public virtual DbSet<Pago> Pagos { get; set; }
-
     public virtual DbSet<Presupuesto> Presupuestos { get; set; }
-
     public virtual DbSet<Transaccion> Transacciones { get; set; }
-
     public virtual DbSet<Usuario> Usuarios { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
