@@ -11,5 +11,8 @@ namespace Backend.Services.Interfaces
         Task<bool> EliminarTransaccionAsync(EliminarTransaccionDTO req);
         Task<List<TotalxDiaDTO>> TotalGastosUltimos6diasPorUsuarioAsync();
         Task<List<GraficoCategoriasDTO>> TotalGastosPorCategoriaAsync();
+        Task<decimal> TotalGastosxMesAsync();
+        Task<decimal> TotalIngresosxMesAsync();
+        Task<decimal> BalanceMesActualAsync();
     }
 }

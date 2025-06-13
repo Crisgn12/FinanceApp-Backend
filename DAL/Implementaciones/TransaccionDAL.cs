@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -223,6 +224,90 @@ namespace DAL.Implementaciones
             catch (Exception ex)
             {
                 throw new Exception($"Error al obtener el total de gastos por categoría: {ex.Message}");
+            }
+        }
+
+        public async Task<decimal> TotalGastosxMes(string usuarioId)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand("SP_OBTENER_TOTAL_GASTOS_MES_ACTUAL_POR_USUARIO", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@UsuarioID", usuarioId);
+
+                        var result = await command.ExecuteScalarAsync();
+                        return result != null ? Convert.ToDecimal(result) : 0;
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Number == 50000)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el total de gastos por mes: {ex.Message}");
+            }
+        }
+
+        public async Task<decimal> TotalIngresosxMes(string usuarioId)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand("SP_OBTENER_TOTAL_INGRESOS_MES_ACTUAL_POR_USUARIO", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@UsuarioID", usuarioId);
+
+                        var result = await command.ExecuteScalarAsync();
+                        return result != null ? Convert.ToDecimal(result) : 0;
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Number == 50000)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el total de ingresos por mes: {ex.Message}");
+            }
+        }
+
+        public async Task<decimal> BalanceMesActual(string usuarioId)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
+                {
+                    await connection.OpenAsync();
+
+                    using (var command = new SqlCommand("SP_OBTENER_BALANCE_MES_ACTUAL_POR_USUARIO", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@UsuarioID", usuarioId);
+
+                        var result = await command.ExecuteScalarAsync();
+                        return result != null ? Convert.ToDecimal(result) : 0;
+                    }
+                }
+            }
+            catch (SqlException ex) when (ex.Number == 50000)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el balance del mes actual: {ex.Message}");
             }
         }
     }
