@@ -112,8 +112,8 @@ builder.Services.AddScoped<ITransaccionDAL, TransaccionDAL>();
 builder.Services.AddScoped<ITransaccionService, TransaccionService>();
 builder.Services.AddScoped<IPagoProgramadoDAL, PagoProgramadoDAL>();
 builder.Services.AddScoped<IPagoProgramadoService, PagoProgramadoService>();
-builder.Services.AddScoped<IEventoFinancieroDAL, EventoFinancieroDALImpl>();
-builder.Services.AddScoped<IEventoFinancieroService, EventoFinancieroService>();
+builder.Services.AddScoped<IEventosFinancieroDAL, EventosFinancieroDALImpl>();
+builder.Services.AddScoped<IEventosFinancieroService, EventosFinancieroService>();
 #endregion
 
 var app = builder.Build();

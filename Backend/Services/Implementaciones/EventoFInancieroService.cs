@@ -8,15 +8,15 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace Backend.Services.Implementaciones
 {
-    public class EventoFinancieroService : IEventoFinancieroService
+    public class EventosFinancieroService : IEventosFinancieroService
     {
-        private readonly ILogger<EventoFinancieroService> _logger;
+        private readonly ILogger<EventosFinancieroService> _logger;
         private readonly IUnidadDeTrabajo _unidadDeTrabajo;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public EventoFinancieroService(
+        public EventosFinancieroService(
             IUnidadDeTrabajo unidad,
-            ILogger<EventoFinancieroService> logger,
+            ILogger<EventosFinancieroService> logger,
             IHttpContextAccessor httpContextAccessor)
         {
             _unidadDeTrabajo = unidad;
@@ -24,9 +24,9 @@ namespace Backend.Services.Implementaciones
             _httpContextAccessor = httpContextAccessor;
         }
 
-        private EventoFinancieroDTO Convertir(EventoFinanciero evento)
+        private EventosFinancieroDTO Convertir(EventosFinanciero evento)
         {
-            return new EventoFinancieroDTO
+            return new EventosFinancieroDTO
             {
                 IdEvento = evento.IdEvento,
                 UsuarioID = evento.UsuarioId,
@@ -41,13 +41,13 @@ namespace Backend.Services.Implementaciones
                 Frecuencia = evento.Frecuencia,
                 Repeticiones = evento.Repeticiones,
                 Activo = evento.Activo,
-                RecurrenciaID = evento.RecurrenciaID
+                RecurrenciaId = evento.RecurrenciaId
             };
         }
 
-        private EventoFinanciero Convertir(EventoFinancieroDTO dto)
+        private EventosFinanciero Convertir(EventosFinancieroDTO dto)
         {
-            return new EventoFinanciero
+            return new EventosFinanciero
             {
                 IdEvento = dto.IdEvento ?? 0,
                 UsuarioId = dto.UsuarioID,
@@ -62,23 +62,22 @@ namespace Backend.Services.Implementaciones
                 Frecuencia = dto.Frecuencia,
                 Repeticiones = dto.Repeticiones,
                 Activo = dto.Activo ?? true,
-                RecurrenciaID = dto.RecurrenciaID,
-                CreatedAt = DateTime.UtcNow
+                RecurrenciaId = dto.RecurrenciaId
             };
         }
 
-        public EventoFinancieroDTO CrearEventoFinanciero(EventoFinancieroDTO evento)
+        public EventosFinancieroDTO CrearEventosFinanciero(EventosFinancieroDTO evento)
         {
             try
             {
-                _logger.LogInformation("Ingresa a CrearEventoFinanciero");
+                _logger.LogInformation("Ingresa a CrearEventosFinanciero");
 
                 var usuarioId = GetCurrentUserId();
                 evento.UsuarioID = usuarioId;
 
-                ValidarEventoFinanciero(evento);
+                ValidarEventosFinanciero(evento);
 
-                var entity = _unidadDeTrabajo.EventoFinancieroDAL.CrearEventoFinanciero(Convertir(evento));
+                var entity = _unidadDeTrabajo.EventosFinancieroDAL.CrearEventosFinanciero(Convertir(evento));
                 _unidadDeTrabajo.GuardarCambios();
 
                 return Convertir(entity);
@@ -90,11 +89,11 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        public EventoFinancieroDTO ActualizarEventoFinanciero(EventoFinancieroDTO dto)
+        public EventosFinancieroDTO ActualizarEventosFinanciero(EventosFinancieroDTO dto)
         {
             try
             {
-                _logger.LogInformation("Ingresa a ActualizarEventoFinanciero");
+                _logger.LogInformation("Ingresa a ActualizarEventosFinanciero");
 
                 var usuarioId = GetCurrentUserId();
                 dto.UsuarioID = usuarioId;
@@ -102,11 +101,11 @@ namespace Backend.Services.Implementaciones
                 if (dto.IdEvento == null || dto.IdEvento <= 0)
                     throw new ArgumentException("ID de evento inválido.");
 
-                var entity = _unidadDeTrabajo.EventoFinancieroDAL.FindById(dto.IdEvento.Value);
+                var entity = _unidadDeTrabajo.EventosFinancieroDAL.FindById(dto.IdEvento.Value);
                 if (entity == null)
                     throw new Exception("No se encontró el evento con el ID especificado.");
 
-                ValidarEventoFinanciero(dto);
+                ValidarEventosFinanciero(dto);
 
                 // Actualizar los campos
                 if (!string.IsNullOrWhiteSpace(dto.Titulo))
@@ -142,15 +141,13 @@ namespace Backend.Services.Implementaciones
                 if (dto.Activo.HasValue)
                     entity.Activo = dto.Activo.Value;
 
-                if (dto.RecurrenciaID.HasValue)
-                    entity.RecurrenciaID = dto.RecurrenciaID;
+                if (dto.RecurrenciaId.HasValue)
+                    entity.RecurrenciaId = dto.RecurrenciaId;
 
-                entity.UpdatedAt = DateTime.UtcNow;
-
-                _unidadDeTrabajo.EventoFinancieroDAL.ActualizarEventoFinanciero(entity);
+                _unidadDeTrabajo.EventosFinancieroDAL.ActualizarEventosFinanciero(entity);
                 _unidadDeTrabajo.GuardarCambios();
 
-                var entidadRecargada = _unidadDeTrabajo.EventoFinancieroDAL.FindById(entity.IdEvento);
+                var entidadRecargada = _unidadDeTrabajo.EventosFinancieroDAL.FindById(entity.IdEvento);
                 return Convertir(entidadRecargada);
             }
             catch (Exception ex)
@@ -160,22 +157,22 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        public EventoFinancieroDTO EliminarEventoFinanciero(int idEvento)
+        public EventosFinancieroDTO EliminarEventosFinanciero(int idEvento)
         {
             try
             {
-                _logger.LogInformation("Ingresa a EliminarEventoFinanciero");
+                _logger.LogInformation("Ingresa a EliminarEventosFinanciero");
 
                 var usuarioId = GetCurrentUserId();
 
-                var entidadEnBd = _unidadDeTrabajo.EventoFinancieroDAL.FindById(idEvento);
+                var entidadEnBd = _unidadDeTrabajo.EventosFinancieroDAL.FindById(idEvento);
                 if (entidadEnBd == null || entidadEnBd.UsuarioId != usuarioId)
                 {
                     _logger.LogWarning($"Evento financiero con ID {idEvento} no encontrado o no pertenece al usuario");
                     return null;
                 }
 
-                _unidadDeTrabajo.EventoFinancieroDAL.EliminarEventoFinanciero(idEvento);
+                _unidadDeTrabajo.EventosFinancieroDAL.EliminarEventosFinanciero(idEvento);
                 _unidadDeTrabajo.GuardarCambios();
 
                 return Convertir(entidadEnBd);
@@ -187,13 +184,13 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        public void EliminarEventosPorRecurrencia(int recurrenciaId)
+        public void EliminarEventosPorRecurrencia(int RecurrenciaId)
         {
             try
             {
                 _logger.LogInformation("Ingresa a EliminarEventosPorRecurrencia");
 
-                _unidadDeTrabajo.EventoFinancieroDAL.EliminarEventosPorRecurrencia(recurrenciaId);
+                _unidadDeTrabajo.EventosFinancieroDAL.EliminarEventosPorRecurrencia(RecurrenciaId);
                 _unidadDeTrabajo.GuardarCambios();
             }
             catch (Exception ex)
@@ -209,8 +206,8 @@ namespace Backend.Services.Implementaciones
             {
                 _logger.LogInformation("Ingresa a ActualizarEventosPorRecurrencia");
 
-                _unidadDeTrabajo.EventoFinancieroDAL.ActualizarEventosPorRecurrencia(
-                    dto.RecurrenciaID,
+                _unidadDeTrabajo.EventosFinancieroDAL.ActualizarEventosPorRecurrencia(
+                    dto.RecurrenciaId,
                     dto.ColorFondo,
                     dto.Monto,
                     dto.Activo);
@@ -224,14 +221,14 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        public List<EventoFinancieroDTO> ListarEventosPorUsuarioYRango(DateTime fechaInicio, DateTime fechaFin)
+        public List<EventosFinancieroDTO> ListarEventosPorUsuarioYRango(DateTime fechaInicio, DateTime fechaFin)
         {
             try
             {
                 _logger.LogInformation("Ingresa a ListarEventosPorUsuarioYRango");
 
                 var usuarioId = GetCurrentUserId();
-                var eventosEnt = _unidadDeTrabajo.EventoFinancieroDAL
+                var eventosEnt = _unidadDeTrabajo.EventosFinancieroDAL
                     .ListarEventosPorUsuarioYRango(usuarioId, fechaInicio, fechaFin);
 
                 return eventosEnt.Select(e => Convertir(e)).ToList();
@@ -243,13 +240,13 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        public EventoFinancieroDTO GetEventoFinancieroById(int idEvento)
+        public EventosFinancieroDTO GetEventosFinancieroById(int idEvento)
         {
             try
             {
-                _logger.LogInformation("Ingresa a GetEventoFinancieroById");
+                _logger.LogInformation("Ingresa a GetEventosFinancieroById");
 
-                var evento = _unidadDeTrabajo.EventoFinancieroDAL.FindById(idEvento);
+                var evento = _unidadDeTrabajo.EventosFinancieroDAL.FindById(idEvento);
                 if (evento == null)
                 {
                     _logger.LogWarning($"Evento financiero con ID {idEvento} no encontrado");
@@ -265,14 +262,14 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        public List<EventoFinancieroDTO> GetEventosPorUsuario()
+        public List<EventosFinancieroDTO> GetEventosPorUsuario()
         {
             try
             {
                 _logger.LogInformation("Ingresa a GetEventosPorUsuario");
 
                 var usuarioId = GetCurrentUserId();
-                var eventosEnt = _unidadDeTrabajo.EventoFinancieroDAL.GetEventosPorUsuario(usuarioId);
+                var eventosEnt = _unidadDeTrabajo.EventosFinancieroDAL.GetEventosPorUsuario(usuarioId);
 
                 return eventosEnt.Select(e => Convertir(e)).ToList();
             }
@@ -283,7 +280,7 @@ namespace Backend.Services.Implementaciones
             }
         }
 
-        private void ValidarEventoFinanciero(EventoFinancieroDTO evento)
+        private void ValidarEventosFinanciero(EventosFinancieroDTO evento)
         {
             if (string.IsNullOrWhiteSpace(evento.Titulo))
                 throw new ArgumentException("El título del evento es requerido.");

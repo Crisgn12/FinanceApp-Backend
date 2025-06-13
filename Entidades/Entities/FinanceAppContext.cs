@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 
 namespace Entidades.Entities;
 
@@ -17,7 +17,7 @@ public partial class FinanceAppContext : DbContext
     }
     public virtual DbSet<Ahorro> Ahorros { get; set; }
     public virtual DbSet<AporteMetaAhorro> AporteMetaAhorros { get; set; }
-    public virtual DbSet<EventoFinanciero> EventosFinancieros { get; set; }
+    public virtual DbSet<EventosFinanciero> EventosFinancieros { get; set; }
     public virtual DbSet<Categoria> Categorias { get; set; }
     public virtual DbSet<Informe> Informes { get; set; }
     public virtual DbSet<Notificacion> Notificaciones { get; set; }
@@ -157,6 +157,52 @@ public partial class FinanceAppContext : DbContext
             //    .HasConstraintName("FK_Notificacion_Usuario");
         });
 
+        modelBuilder.Entity<Recurrencia>(entity =>
+        {
+            entity.HasKey(e => e.RecurrenciaId).HasName("PK__Recurren__627479A6CC01677D");
+
+            entity.Property(e => e.RecurrenciaId).HasColumnName("RecurrenciaID");
+            entity.Property(e => e.CreadoEn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DiasSemana).HasMaxLength(20);
+            entity.Property(e => e.FechaFin).HasColumnType("datetime");
+            entity.Property(e => e.Frecuencia).HasMaxLength(20);
+            entity.Property(e => e.Intervalo).HasDefaultValue(1);
+        });
+
+        modelBuilder.Entity<EventosFinanciero>(entity =>
+        {
+            entity.HasKey(e => e.IdEvento).HasName("PK__EventosF__BCC709737F97899A");
+
+            entity.Property(e => e.IdEvento).HasColumnName("Id_Evento");
+            entity.Property(e => e.Activo).HasDefaultValue(true);
+            entity.Property(e => e.ColorFondo).HasMaxLength(10);
+            entity.Property(e => e.Descripcion).HasMaxLength(500);
+            entity.Property(e => e.EsTodoElDia).HasDefaultValue(false);
+            entity.Property(e => e.Estado).HasMaxLength(50);
+            entity.Property(e => e.FechaFin).HasColumnType("datetime");
+            entity.Property(e => e.FechaInicio).HasColumnType("datetime");
+            entity.Property(e => e.Frecuencia).HasMaxLength(20);
+            entity.Property(e => e.Monto).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.ProximaEjecucion).HasColumnType("datetime");
+            entity.Property(e => e.RecurrenciaId).HasColumnName("RecurrenciaID");
+            entity.Property(e => e.Tipo).HasMaxLength(50);
+            entity.Property(e => e.Titulo).HasMaxLength(100);
+            entity.Property(e => e.UltimaEjecucion).HasColumnType("datetime");
+            entity.Property(e => e.UsuarioId)
+                .HasMaxLength(450)
+                .HasColumnName("UsuarioID");
+
+            entity.HasOne(d => d.Recurrencia).WithMany(p => p.EventosFinancieros)
+                .HasForeignKey(d => d.RecurrenciaId)
+                .HasConstraintName("FK_Evento_Recurrencia");
+
+            /*entity.HasOne(d => d.Usuario).WithMany(p => p.EventosFinancieros)
+                .HasForeignKey(d => d.UsuarioId)
+                .HasConstraintName("FK_Evento_Usuario");*/
+        });
+
         modelBuilder.Entity<Pago>(entity =>
         {
             entity.HasKey(e => e.PagoId).HasName("PK__Pagos__F00B6158C7E59D39");
@@ -246,6 +292,53 @@ public partial class FinanceAppContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Presupuesto_Usuario");
         });
+
+        modelBuilder.Entity<Recurrencia>(entity =>
+        {
+            entity.HasKey(e => e.RecurrenciaId).HasName("PK__Recurren__627479A6CC01677D");
+
+            entity.Property(e => e.RecurrenciaId).HasColumnName("RecurrenciaID");
+            entity.Property(e => e.CreadoEn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DiasSemana).HasMaxLength(20);
+            entity.Property(e => e.FechaFin).HasColumnType("datetime");
+            entity.Property(e => e.Frecuencia).HasMaxLength(20);
+            entity.Property(e => e.Intervalo).HasDefaultValue(1);
+        });
+
+        modelBuilder.Entity<EventosFinanciero>(entity =>
+        {
+            entity.HasKey(e => e.IdEvento).HasName("PK__EventosF__BCC709737F97899A");
+
+            entity.Property(e => e.IdEvento).HasColumnName("Id_Evento");
+            entity.Property(e => e.Activo).HasDefaultValue(true);
+            entity.Property(e => e.ColorFondo).HasMaxLength(10);
+            entity.Property(e => e.Descripcion).HasMaxLength(500);
+            entity.Property(e => e.EsTodoElDia).HasDefaultValue(false);
+            entity.Property(e => e.Estado).HasMaxLength(50);
+            entity.Property(e => e.FechaFin).HasColumnType("datetime");
+            entity.Property(e => e.FechaInicio).HasColumnType("datetime");
+            entity.Property(e => e.Frecuencia).HasMaxLength(20);
+            entity.Property(e => e.Monto).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.ProximaEjecucion).HasColumnType("datetime");
+            entity.Property(e => e.RecurrenciaId).HasColumnName("RecurrenciaID");
+            entity.Property(e => e.Tipo).HasMaxLength(50);
+            entity.Property(e => e.Titulo).HasMaxLength(100);
+            entity.Property(e => e.UltimaEjecucion).HasColumnType("datetime");
+            entity.Property(e => e.UsuarioId)
+                .HasMaxLength(450)
+                .HasColumnName("UsuarioID");
+
+            entity.HasOne(d => d.Recurrencia).WithMany(p => p.EventosFinancieros)
+                .HasForeignKey(d => d.RecurrenciaId)
+                .HasConstraintName("FK_Evento_Recurrencia");
+
+            /*entity.HasOne(d => d.Usuario).WithMany(p => p.EventosFinancieros)
+                .HasForeignKey(d => d.UsuarioId)
+                .HasConstraintName("FK_Evento_Usuario");*/
+        });
+
 
         modelBuilder.Entity<Transaccion>(entity =>
         {

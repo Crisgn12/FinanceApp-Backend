@@ -8,17 +8,17 @@ namespace Backend.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class EventoFinancieroController : ControllerBase
+    public class EventosFinancieroController : ControllerBase
     {
-        private readonly IEventoFinancieroService _eventoFinancieroService;
+        private readonly IEventosFinancieroService _EventosFinancieroService;
 
-        public EventoFinancieroController(IEventoFinancieroService eventoFinancieroService)
+        public EventosFinancieroController(IEventosFinancieroService EventosFinancieroService)
         {
-            _eventoFinancieroService = eventoFinancieroService;
+            _EventosFinancieroService = EventosFinancieroService;
         }
 
         [HttpPost("crear")]
-        public IActionResult CrearEventoFinanciero([FromBody] EventoFinancieroDTO evento)
+        public IActionResult CrearEventosFinanciero([FromBody] EventosFinancieroDTO evento)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace Backend.Controllers
                     !evento.FechaInicio.HasValue || !evento.FechaFin.HasValue)
                     return BadRequest("Datos inválidos para el evento financiero.");
 
-                var result = _eventoFinancieroService.CrearEventoFinanciero(evento);
+                var result = _EventosFinancieroService.CrearEventosFinanciero(evento);
                 return Ok(result);
             }
             catch (ArgumentException ex)
@@ -40,14 +40,14 @@ namespace Backend.Controllers
         }
 
         [HttpPost("actualizar")]
-        public IActionResult ActualizarEventoFinanciero([FromBody] EventoFinancieroDTO evento)
+        public IActionResult ActualizarEventosFinanciero([FromBody] EventosFinancieroDTO evento)
         {
             try
             {
                 if (evento.IdEvento == null || evento.IdEvento <= 0)
                     return BadRequest("ID de evento inválido para actualizar.");
 
-                var result = _eventoFinancieroService.ActualizarEventoFinanciero(evento);
+                var result = _EventosFinancieroService.ActualizarEventosFinanciero(evento);
                 return Ok(result);
             }
             catch (ArgumentException ex)
@@ -61,14 +61,14 @@ namespace Backend.Controllers
         }
 
         [HttpPost("eliminar")]
-        public IActionResult EliminarEventoFinanciero([FromBody] EliminarEventoDTO request)
+        public IActionResult EliminarEventosFinanciero([FromBody] EliminarEventoDTO request)
         {
             try
             {
                 if (request == null || request.IdEvento <= 0)
                     return BadRequest("ID de evento inválido.");
 
-                var result = _eventoFinancieroService.EliminarEventoFinanciero(request.IdEvento);
+                var result = _EventosFinancieroService.EliminarEventosFinanciero(request.IdEvento);
 
                 if (result == null)
                     return NotFound("Evento financiero no encontrado o no pertenece al usuario.");
@@ -89,7 +89,7 @@ namespace Backend.Controllers
                 if (request == null || request.RecurrenciaId <= 0)
                     return BadRequest("ID de recurrencia inválido.");
 
-                _eventoFinancieroService.EliminarEventosPorRecurrencia(request.RecurrenciaId);
+                _EventosFinancieroService.EliminarEventosPorRecurrencia(request.RecurrenciaId);
                 return Ok("Eventos eliminados exitosamente.");
             }
             catch (Exception ex)
@@ -103,10 +103,10 @@ namespace Backend.Controllers
         {
             try
             {
-                if (dto == null || dto.RecurrenciaID <= 0)
+                if (dto == null || dto.RecurrenciaId <= 0)
                     return BadRequest("Datos inválidos para actualizar eventos por recurrencia.");
 
-                _eventoFinancieroService.ActualizarEventosPorRecurrencia(dto);
+                _EventosFinancieroService.ActualizarEventosPorRecurrencia(dto);
                 return Ok("Eventos actualizados exitosamente.");
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ namespace Backend.Controllers
                 if (request.FechaInicio > request.FechaFin)
                     return BadRequest("La fecha de inicio no puede ser mayor a la fecha de fin.");
 
-                var result = _eventoFinancieroService.ListarEventosPorUsuarioYRango(request.FechaInicio, request.FechaFin);
+                var result = _EventosFinancieroService.ListarEventosPorUsuarioYRango(request.FechaInicio, request.FechaFin);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -136,14 +136,14 @@ namespace Backend.Controllers
         }
 
         [HttpPost("obtener")]
-        public IActionResult GetEventoFinancieroById([FromBody] ObtenerEventoPorIdDTO request)
+        public IActionResult GetEventosFinancieroById([FromBody] ObtenerEventoPorIdDTO request)
         {
             try
             {
                 if (request == null || request.IdEvento <= 0)
                     return BadRequest("ID de evento inválido.");
 
-                var result = _eventoFinancieroService.GetEventoFinancieroById(request.IdEvento);
+                var result = _EventosFinancieroService.GetEventosFinancieroById(request.IdEvento);
 
                 if (result == null)
                     return NotFound("Evento financiero no encontrado.");
@@ -161,7 +161,7 @@ namespace Backend.Controllers
         {
             try
             {
-                var result = _eventoFinancieroService.GetEventosPorUsuario();
+                var result = _EventosFinancieroService.GetEventosPorUsuario();
                 return Ok(result);
             }
             catch (Exception ex)

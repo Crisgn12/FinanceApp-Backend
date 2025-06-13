@@ -2,15 +2,15 @@
 
 namespace Backend.Services.Interfaces
 {
-    public interface IEventoFinancieroService
+    public interface IEventosFinancieroService
     {
-        EventoFinancieroDTO CrearEventoFinanciero(EventoFinancieroDTO evento);
-        EventoFinancieroDTO ActualizarEventoFinanciero(EventoFinancieroDTO evento);
-        EventoFinancieroDTO EliminarEventoFinanciero(int idEvento);
-        void EliminarEventosPorRecurrencia(int recurrenciaId);
+        EventosFinancieroDTO CrearEventosFinanciero(EventosFinancieroDTO evento);
+        EventosFinancieroDTO ActualizarEventosFinanciero(EventosFinancieroDTO evento);
+        EventosFinancieroDTO EliminarEventosFinanciero(int idEvento);
+        void EliminarEventosPorRecurrencia(int RecurrenciaId);
         void ActualizarEventosPorRecurrencia(ActualizarEventosPorRecurrenciaDTO dto);
-        List<EventoFinancieroDTO> ListarEventosPorUsuarioYRango(DateTime fechaInicio, DateTime fechaFin);
-        EventoFinancieroDTO GetEventoFinancieroById(int idEvento);
-        List<EventoFinancieroDTO> GetEventosPorUsuario();
+        List<EventosFinancieroDTO> ListarEventosPorUsuarioYRango(DateTime fechaInicio, DateTime fechaFin);
+        EventosFinancieroDTO GetEventosFinancieroById(int idEvento);
+        List<EventosFinancieroDTO> GetEventosPorUsuario();
     }
 }

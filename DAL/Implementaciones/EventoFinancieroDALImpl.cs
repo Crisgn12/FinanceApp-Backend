@@ -6,20 +6,19 @@ using System.Data;
 
 namespace DAL.Implementaciones
 {
-    public class EventoFinancieroDALImpl : DALGenericoImpl<EventoFinanciero>, IEventoFinancieroDAL
+    public class EventosFinancieroDALImpl : DALGenericoImpl<EventosFinanciero>, IEventosFinancieroDAL
     {
         FinanceAppContext _context;
 
-        public EventoFinancieroDALImpl(FinanceAppContext context) : base(context)
+        public EventosFinancieroDALImpl(FinanceAppContext context) : base(context)
         {
             _context = context;
         }
 
-        public EventoFinanciero CrearEventoFinanciero(EventoFinanciero evento)
+        public EventosFinanciero CrearEventosFinanciero(EventosFinanciero evento)
         {
-            evento.CreatedAt = DateTime.UtcNow;
 
-            var query = "EXEC sp_CrearEventoFinanciero @Titulo, @Descripcion, @FechaInicio, @FechaFin, @EsTodoElDia, @Tipo, @Monto, @ColorFondo, @Frecuencia, @Repeticiones, @Activo, @UsuarioID, @RecurrenciaID";
+            var query = "EXEC sp_CrearEventosFinanciero @Titulo, @Descripcion, @FechaInicio, @FechaFin, @EsTodoElDia, @Tipo, @Monto, @ColorFondo, @Frecuencia, @Repeticiones, @Activo, @UsuarioID, @RecurrenciaID";
 
             var parameters = new[]
             {
@@ -35,7 +34,7 @@ namespace DAL.Implementaciones
                 new SqlParameter("@Repeticiones", evento.Repeticiones ?? (object)DBNull.Value),
                 new SqlParameter("@Activo", evento.Activo),
                 new SqlParameter("@UsuarioID", evento.UsuarioId),
-                new SqlParameter("@RecurrenciaID", evento.RecurrenciaID ?? (object)DBNull.Value)
+                new SqlParameter("@RecurrenciaID", evento.RecurrenciaId ?? (object)DBNull.Value)
             };
 
             _context.Database.ExecuteSqlRaw(query, parameters);
@@ -43,17 +42,15 @@ namespace DAL.Implementaciones
             // Obtener el evento creado por el usuario y fecha más reciente
             var eventoCreado = _context.EventosFinancieros
                 .Where(e => e.UsuarioId == evento.UsuarioId && e.Titulo == evento.Titulo)
-                .OrderByDescending(e => e.CreatedAt)
                 .FirstOrDefault();
 
             return eventoCreado ?? evento;
         }
 
-        public EventoFinanciero ActualizarEventoFinanciero(EventoFinanciero evento)
+        public EventosFinanciero ActualizarEventosFinanciero(EventosFinanciero evento)
         {
-            evento.UpdatedAt = DateTime.UtcNow;
 
-            var query = "EXEC sp_ActualizarEventoFinanciero @Id_Evento, @Titulo, @Descripcion, @FechaInicio, @FechaFin, @EsTodoElDia, @Tipo, @Monto, @ColorFondo, @Frecuencia, @Repeticiones, @Activo, @RecurrenciaID";
+            var query = "EXEC sp_ActualizarEventosFinanciero @Id_Evento, @Titulo, @Descripcion, @FechaInicio, @FechaFin, @EsTodoElDia, @Tipo, @Monto, @ColorFondo, @Frecuencia, @Repeticiones, @Activo, @RecurrenciaID";
 
             var parameters = new[]
             {
@@ -69,16 +66,16 @@ namespace DAL.Implementaciones
                 new SqlParameter("@Frecuencia", evento.Frecuencia ?? (object)DBNull.Value),
                 new SqlParameter("@Repeticiones", evento.Repeticiones ?? (object)DBNull.Value),
                 new SqlParameter("@Activo", evento.Activo),
-                new SqlParameter("@RecurrenciaID", evento.RecurrenciaID ?? (object)DBNull.Value)
+                new SqlParameter("@RecurrenciaID", evento.RecurrenciaId ?? (object)DBNull.Value)
             };
 
             _context.Database.ExecuteSqlRaw(query, parameters);
             return evento;
         }
 
-        public void EliminarEventoFinanciero(int idEvento)
+        public void EliminarEventosFinanciero(int idEvento)
         {
-            var query = "EXEC sp_EliminarEventoFinanciero @Id_Evento";
+            var query = "EXEC sp_EliminarEventosFinanciero @Id_Evento";
             var parameters = new[]
             {
                 new SqlParameter("@Id_Evento", idEvento)
@@ -112,7 +109,7 @@ namespace DAL.Implementaciones
             _context.Database.ExecuteSqlRaw(query, parameters);
         }
 
-        public List<EventoFinanciero> ListarEventosPorUsuarioYRango(string usuarioId, DateTime fechaInicio, DateTime fechaFin)
+        public List<EventosFinanciero> ListarEventosPorUsuarioYRango(string usuarioId, DateTime fechaInicio, DateTime fechaFin)
         {
             var query = "EXEC sp_ListarEventosPorUsuarioYRango @UsuarioID, @FechaInicio, @FechaFin";
             var parameters = new[]
@@ -127,15 +124,15 @@ namespace DAL.Implementaciones
                 .ToList();
         }
 
-        public EventoFinanciero GetEventoFinancieroById(int idEvento)
+        public EventosFinanciero GetEventosFinancieroById(int idEvento)
         {
             return _context.EventosFinancieros.Find(idEvento);
         }
 
-        public List<EventoFinanciero> GetEventosPorUsuario(string usuarioId)
+        public List<EventosFinanciero> GetEventosPorUsuario(string usuarioId)
         {
             return _context.EventosFinancieros
-                .Where(e => e.UsuarioId == usuarioId && e.Activo)
+                .Where(e => e.UsuarioId == usuarioId)
                 .OrderBy(e => e.FechaInicio)
                 .ToList();
         }

@@ -17,12 +17,12 @@ namespace DAL.Implementaciones
         public ICategoriaDAL CategoriaDAL { get; private set; }
         public ITransaccionDAL TransaccionDAL { get; private set; }
         public IPagoProgramadoDAL PagoProgramadoDAL { get; private set; }
-        public IEventoFinancieroDAL EventoFinancieroDAL { get; private set; }
+        public IEventosFinancieroDAL EventosFinancieroDAL { get; private set; }
         public IAhorroDAL AhorroDALImpl { get; private set; }
         public IAporteMetaAhorroDAL AporteMetaAhorroDALImpl { get; private set; }
 
 
-        public UnidadDeTrabajo(FinanceAppContext context, IUsuarioDAL usuarioDAL, IAhorroDAL ahorroDALImpl, IAporteMetaAhorroDAL aporteMetaAhorroDALImpl, ICategoriaDAL categoriaDAL, ITransaccionDAL transaccionDAL, IPagoProgramadoDAL pagoProgramadoDAL, IEventoFinancieroDAL eventoFinancieroDAL)
+        public UnidadDeTrabajo(FinanceAppContext context, IUsuarioDAL usuarioDAL, IAhorroDAL ahorroDALImpl, IAporteMetaAhorroDAL aporteMetaAhorroDALImpl, ICategoriaDAL categoriaDAL, ITransaccionDAL transaccionDAL, IPagoProgramadoDAL pagoProgramadoDAL, IEventosFinancieroDAL EventosFinancieroDAL)
         {
             this._context = context;
             this.UsuarioDAL = usuarioDAL;
@@ -30,9 +30,9 @@ namespace DAL.Implementaciones
             this.AporteMetaAhorroDALImpl = aporteMetaAhorroDALImpl;
             this.CategoriaDAL = categoriaDAL;
             this.TransaccionDAL = transaccionDAL;
-            this.EventoFinancieroDAL = eventoFinancieroDAL;
+            this.EventosFinancieroDAL = EventosFinancieroDAL;
             PagoProgramadoDAL = pagoProgramadoDAL;
-            EventoFinancieroDAL = eventoFinancieroDAL;
+            EventosFinancieroDAL = EventosFinancieroDAL;
         }
 
         public bool GuardarCambios()

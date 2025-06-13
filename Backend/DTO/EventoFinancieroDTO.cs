@@ -1,6 +1,6 @@
 ﻿namespace Backend.DTO
 {
-    public class EventoFinancieroDTO
+    public class EventosFinancieroDTO
     {
         public int? IdEvento { get; set; }
         public string? UsuarioID { get; set; }
@@ -15,10 +15,10 @@
         public string? Frecuencia { get; set; } // "Diaria", "Semanal", "Mensual", "Anual"
         public int? Repeticiones { get; set; }
         public bool? Activo { get; set; } = true;
-        public int? RecurrenciaID { get; set; }
+        public int? RecurrenciaId { get; set; }
     }
 
-    public class EventoFinancieroRangoDTO
+    public class EventosFinancieroRangoDTO
     {
         public string? UsuarioID { get; set; }
         public DateTime FechaInicio { get; set; }
@@ -27,7 +27,7 @@
 
     public class ActualizarEventosPorRecurrenciaDTO
     {
-        public int RecurrenciaID { get; set; }
+        public int RecurrenciaId { get; set; }
         public string? ColorFondo { get; set; }
         public decimal? Monto { get; set; }
         public bool? Activo { get; set; }

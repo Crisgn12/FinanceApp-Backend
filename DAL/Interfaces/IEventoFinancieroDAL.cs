@@ -2,15 +2,15 @@
 
 namespace DAL.Interfaces
 {
-    public interface IEventoFinancieroDAL : IDALGenerico<EventoFinanciero>
+    public interface IEventosFinancieroDAL : IDALGenerico<EventosFinanciero>
     {
-        EventoFinanciero CrearEventoFinanciero(EventoFinanciero evento);
-        EventoFinanciero ActualizarEventoFinanciero(EventoFinanciero evento);
-        void EliminarEventoFinanciero(int idEvento);
+        EventosFinanciero CrearEventosFinanciero(EventosFinanciero evento);
+        EventosFinanciero ActualizarEventosFinanciero(EventosFinanciero evento);
+        void EliminarEventosFinanciero(int idEvento);
         void EliminarEventosPorRecurrencia(int recurrenciaId);
         void ActualizarEventosPorRecurrencia(int recurrenciaId, string? colorFondo = null, decimal? monto = null, bool? activo = null);
-        List<EventoFinanciero> ListarEventosPorUsuarioYRango(string usuarioId, DateTime fechaInicio, DateTime fechaFin);
-        EventoFinanciero GetEventoFinancieroById(int idEvento);
-        List<EventoFinanciero> GetEventosPorUsuario(string usuarioId);
+        List<EventosFinanciero> ListarEventosPorUsuarioYRango(string usuarioId, DateTime fechaInicio, DateTime fechaFin);
+        EventosFinanciero GetEventosFinancieroById(int idEvento);
+        List<EventosFinanciero> GetEventosPorUsuario(string usuarioId);
     }
 }
