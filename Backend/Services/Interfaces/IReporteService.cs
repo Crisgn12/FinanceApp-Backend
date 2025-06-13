@@ -7,7 +7,7 @@ namespace Backend.Services.Interfaces
     public interface IReporteService
     {
         // Obtiene los datos del reporte para un usuario y rango de fechas
-        Task<ReporteFinancieroDataDTO> GetReporteFinancieroDataAsync(string userId, ReporteFinancieroRequestDTO request);
+        Task<ReporteFinancieroDataDTO> GetReporteFinancieroDataAsync(ReporteFinancieroRequestDTO request);
 
         // Genera el PDF y devuelve los bytes
         byte[] GenerarPdfReporteFinanciero(ReporteFinancieroDataDTO data);
